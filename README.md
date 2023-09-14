@@ -1,8 +1,8 @@
 # MilkKernel - Action
 
-**Dynamic Kernel with KernelSU**
+**Dynamic Kernel, based on Vantom**
 
-**For davinci | Mi9T / RedmiK20**
+**For davinci | Mi 9T / Redmi K20**
 
 ## Install
 
