@@ -3,7 +3,7 @@
 WORKDIR="$(pwd)"
 
 # Clang
-CLANG_DLINK="$(curl -s https://api.github.com/repos/ZyCromerZ/Clang/releases/latest | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/"$//')"
+CLANG_DLINK="$(curl -s https://api.github.com/repos/ZyCromerZ/Clang/releases/latest | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
 CLANG_DIR="$WORKDIR/Clang/bin"
 
 # Kernel
@@ -45,8 +45,8 @@ tar -C Clang/ -zxvf Clang.tar.gz
 rm -rf Clang.tar.gz
 
 # Toolchain Versions
-CLANG_VERSION="$($CLANG_DIR/clang --version | head -n 1)"
-LLD_VERSION="$($CLANG_DIR/ld.lld --version | head -n 1)"
+CLANG_VERSION="$($CLANG_DIR/clang --version | head -n 1 | cut -f1 -d "(" | sed 's/.$//')"
+LLD_VERSION="$($CLANG_DIR/ld.lld --version | head -n 1 | cut -f1 -d "(" | sed 's/.$//')"
 
 msg "Cloning Kernel"
 git clone --depth=1 $KERNEL_GIT -b $KERNEL_BRANCHE $KERNEL_DIR
