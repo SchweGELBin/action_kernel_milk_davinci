@@ -3,7 +3,7 @@
 WORKDIR="$(pwd)"
 
 # Clang
-CLANG_DLINK="$(curl -s https://api.github.com/repos/ZyCromerZ/Clang/releases/latest | grep -wo "https.*" | grep Clang-.*.tar.gz)"
+CLANG_DLINK="$(curl -s https://api.github.com/repos/ZyCromerZ/Clang/releases/latest | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/"$//')"
 CLANG_DIR="$WORKDIR/Clang/bin"
 
 # Kernel
