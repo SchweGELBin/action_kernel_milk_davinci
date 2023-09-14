@@ -1,0 +1,42 @@
+name: CI Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set Tag
+        run: |
+          echo "BUILD_TIME=$(TZ=Europe/Berlin date +%s | md5sum | awk '{print substr($1,1,10)}')" >> $GITHUB_ENV
+
+      - name: Environment
+        run: |
+          cd $GITHUB_WORKSPACE
+          sudo bash env.sh
+
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE
+          sudo bash main.sh
+          sudo chmod -R 0777 ./*
+          echo "RELEASE_NAME=$(cat "$GITHUB_WORKSPACE/out/RELEASETITLE.txt")" >> $GITHUB_ENV
+          echo "${{ env.RELEASE_NAME }}"
+
+      - name: Release‌‌
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{ github.workspace }}/out/*"
+          name: ${{ env.RELEASE_NAME }}
+          tag: ${{ env.BUILD_TIME }}
+          allowUpdates: true
+          bodyFile: "${{ github.workspace }}/out/RELEASE.md"
+          removeArtifacts: false
+          replacesArtifacts: false
+          token: ${{ secrets.GITHUB_TOKEN }}
