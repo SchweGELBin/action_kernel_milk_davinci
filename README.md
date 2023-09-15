@@ -4,9 +4,11 @@
 
 **For davinci | Mi 9T / Redmi K20**
 
+**Includes KernelSU**
+
 ## Install
 
-- Download **[latest release](https://github.com/SchweGELBin/action_kernelsu_davinci/releases/latest/download/MilkKernel.zip)**
+- Download **[latest release](https://github.com/SchweGELBin/action_kernel_milk_davinci/releases/latest/download/MilkKernel.zip)**
 - Flash via Recovery
 
 ## Build
