@@ -2,24 +2,24 @@
 
 WORKDIR="$(pwd)"
 
-# Clang
+# Clang Data
 CLANG_REPO="ZyCromerZ/Clang"
 
 CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
 CLANG_DIR="$WORKDIR/Clang/bin"
 
-# Kernel
+# Kernel Data
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
 KERNEL_BRANCHE="13"
 
 KERNEL_DIR="$WORKDIR/$KERNEL_NAME"
 
-# Anykernel3
+# Anykernel3 Data
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
 ANYKERNEL3_BRANCHE="master"
 
-# Build
+# Build Data
 DEVICE_CODE="davinci"
 DEVICE_DEFCONFIG="davinci_defconfig"
 DEVICE_ARCH="arch/arm64"
@@ -92,7 +92,6 @@ HOSTCXX=clang++ \
 LLVM=1 \
 LLVM_IAS=1"
 
-# Cleanup
 rm -rf out
 make O=out $args $DEVICE_DEFCONFIG
 KERNEL_VERSION=$(make O=out $args kernelversion | grep "4.14")
@@ -117,14 +116,16 @@ mkdir -p $WORKDIR/out && cp *.zip $WORKDIR/out
 
 cd $WORKDIR/out
 
+# Release Files
+msg "Release Files"
 echo "
-# $KERNEL_NAME
-1. **Time**: $TIME # CET
-2. **Codename**: $DEVICE_CODE
-3. **Kernel Version**: $KERNEL_VERSION
-4. **KernelSU Version**: $KERNELSU_VERSION
-5. **CLANG Version**: $CLANG_VERSION
-6. **LLD Version**: $LLD_VERSION
+## $KERNEL_NAME
+- **Time**: $TIME # CET
+- **Codename**: $DEVICE_CODE
+- **Kernel Version**: $KERNEL_VERSION
+- **KernelSU Version**: $KERNELSU_VERSION
+- **CLANG Version**: $CLANG_VERSION
+- **LLD Version**: $LLD_VERSION
 " > RELEASE.md
 echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > RELEASETITLE.txt
 cat RELEASE.md
