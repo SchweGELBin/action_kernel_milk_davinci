@@ -3,13 +3,16 @@
 WORKDIR="$(pwd)"
 
 # Clang
-CLANG_DLINK="$(curl -s https://api.github.com/repos/ZyCromerZ/Clang/releases/latest | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
+CLANG_REPO="ZyCromerZ/Clang"
+
+CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
 CLANG_DIR="$WORKDIR/Clang/bin"
 
 # Kernel
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
 KERNEL_BRANCHE="13"
+
 KERNEL_DIR="$WORKDIR/$KERNEL_NAME"
 
 # Anykernel3
@@ -17,17 +20,19 @@ ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
 ANYKERNEL3_BRANCHE="master"
 
 # Build
-DEVICES_CODE="davinci"
+DEVICE_CODE="davinci"
 DEVICE_DEFCONFIG="davinci_defconfig"
-DEVICE_DEFCONFIG_FILE="$KERNEL_DIR/arch/arm64/configs/$DEVICE_DEFCONFIG"
-IMAGE="$KERNEL_DIR/out/arch/arm64/boot/Image.gz"
-DTB="$KERNEL_DIR/out/arch/arm64/boot/dtb.img"
-DTBO="$KERNEL_DIR/out/arch/arm64/boot/dtbo.img"
+DEVICE_ARCH="arch/arm64"
+
+DEVICE_DEFCONFIG_FILE="$KERNEL_DIR/$DEVICE_ARCH/configs/$DEVICE_DEFCONFIG"
+IMAGE="$KERNEL_DIR/out/$DEVICE_ARCH/boot/Image.gz"
+DTB="$KERNEL_DIR/out/$DEVICE_ARCH/boot/dtb.img"
+DTBO="$KERNEL_DIR/out/$DEVICE_ARCH/boot/dtbo.img"
 
 export KBUILD_BUILD_USER=SchweGELBin
 export KBUILD_BUILD_HOST=GitHubCI
 
-# Sperated (Bold + Yellow)
+# Highlight
 msg() {
 	echo
 	echo -e "\e[1;33m$*\e[0m"
@@ -36,46 +41,35 @@ msg() {
 
 cd $WORKDIR
 
-# Clang
-msg "Work on $WORKDIR"
-msg "Cloning Clang"
+# Setup
+msg "Setup"
+
+msg "Clang"
 mkdir -p Clang
 aria2c -s16 -x16 -k1M $CLANG_DLINK -o Clang.tar.gz
 tar -C Clang/ -zxvf Clang.tar.gz
 rm -rf Clang.tar.gz
 
-# Toolchain Versions
 CLANG_VERSION="$($CLANG_DIR/clang --version | head -n 1 | cut -f1 -d "(" | sed 's/.$//')"
 LLD_VERSION="$($CLANG_DIR/ld.lld --version | head -n 1 | cut -f1 -d "(" | sed 's/.$//')"
 
-msg "Cloning Kernel"
+msg "Kernel"
 git clone --depth=1 $KERNEL_GIT -b $KERNEL_BRANCHE $KERNEL_DIR
 cd $KERNEL_DIR
 
-msg "Patching KernelSU"
+msg "KernelSU"
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s main
             echo "CONFIG_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
             echo "CONFIG_HAVE_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
             echo "CONFIG_KPROBE_EVENTS=y" >> $DEVICE_DEFCONFIG_FILE
 KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10200))
-msg "KernelSU version: $KERNELSU_VERSION"
+msg "KernelSU Version: $KERNELSU_VERSION"
 
-# PATCH KERNELSU
-msg "Applying patches"
+sed -i "/CONFIG_LOCALVERSION=/c\CONFIG_LOCALVERSION=\"$KERNELSU_VERSION-$KERNEL_NAME\"" $DEVICE_DEFCONFIG_FILE
 
-apply_patchs () {
-for patch_file in $WORKDIR/patchs/*.patch
-	do
-	patch -p1 < "$patch_file"
-done
-}
-apply_patchs
-
-sed -i "/CONFIG_LOCALVERSION=\"-$KERNELSU_VERSION-$KERNEL_NAME\"/" $DEVICE_DEFCONFIG_FILE
-
-# BUILD KERNEL
-msg "Compilation"
+#Build
+msg "Build"
 
 args="PATH=$CLANG_DIR:$PATH \
 ARCH=arm64 \
@@ -98,14 +92,15 @@ HOSTCXX=clang++ \
 LLVM=1 \
 LLVM_IAS=1"
 
-# Linux Kernel Version
+# Cleanup
 rm -rf out
 make O=out $args $DEVICE_DEFCONFIG
 KERNEL_VERSION=$(make O=out $args kernelversion | grep "4.14")
-msg "Linux Kernel version: $KERNEL_VERSION"
 make O=out $args -j"$(nproc --all)"
+msg "Kernel version: $KERNEL_VERSION"
 
-msg "Packing Kernel"
+# Package
+msg "Package"
 cd $WORKDIR
 git clone --depth=1 $ANYKERNEL3_GIT -b $ANYKERNEL3_BRANCHE $WORKDIR/Anykernel3
 cd $WORKDIR/Anykernel3
@@ -113,7 +108,7 @@ cp $IMAGE .
 cp $DTB $WORKDIR/Anykernel3/dtb
 cp $DTBO .
 
-# PACK FILE
+# Archive
 TIME=$(TZ='Europe/Berlin' date +"%Y-%m-%d %H:%M:%S")
 ZIP_NAME="$KERNEL_NAME.zip"
 find ./ * -exec touch -m -d "$TIME" {} \;
@@ -121,12 +116,13 @@ zip -r9 $ZIP_NAME *
 mkdir -p $WORKDIR/out && cp *.zip $WORKDIR/out
 
 cd $WORKDIR/out
+
 echo "
-### $KERNEL_NAME
+# $KERNEL_NAME
 1. **Time**: $TIME # CET
-2. **Device Code**: $DEVICES_CODE
-3. **LINUX Version**: $KERNEL_VERSION
-4. **KERNELSU Version**: $KERNELSU_VERSION
+2. **Codename**: $DEVICE_CODE
+3. **Kernel Version**: $KERNEL_VERSION
+4. **KernelSU Version**: $KERNELSU_VERSION
 5. **CLANG Version**: $CLANG_VERSION
 6. **LLD Version**: $LLD_VERSION
 " > RELEASE.md
