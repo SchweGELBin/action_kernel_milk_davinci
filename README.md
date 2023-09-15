@@ -13,7 +13,7 @@
 
 ## Build
 
-- Fork this repository
+- Fork **[this](https://github.com/SchweGELBin/action_kernel_milk_davinci/)** repository
 - Run Action "CI Build"
 
 ## Thanks / Credits
