@@ -36,11 +36,11 @@ jobs:
         id: upload
         uses: ncipollo/release-action@main
         with:
-          name: "${{ github.workspace }}/out/${{ env.name }}"
+          name: "${{ env.name }}"
           tag: ${{ steps.newtag.outputs.patch }}
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
-          artifacts: "${{ env.filename }}"
+          artifacts: "${{ github.workspace }}/out/${{ env.filename }}"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cleanup
         id: cleanup
