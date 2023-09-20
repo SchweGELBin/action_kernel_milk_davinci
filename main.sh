@@ -126,10 +126,12 @@ echo "
 - **KernelSU Version**: $KERNELSU_VERSION
 - **CLANG Version**: $CLANG_VERSION
 - **LLD Version**: $LLD_VERSION
-" > RELEASE.md
-echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > RELEASETITLE.txt
-cat RELEASE.md
-cat RELEASETITLE.txt
+" > bodyFile.md
+echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > name.txt
+echo "0000000001" > tag.txt
+cat bodyFile.md
+cat name.txt
+cat tag.txt
 
 # Finish
 msg "Done"
