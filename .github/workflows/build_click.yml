@@ -5,28 +5,42 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@main
         with:
-          persist-credentials: false
           fetch-depth: 0
+      - name: Previous Tag
+        id: previoustag
+        uses: WyriHaximus/github-action-get-previous-tag@master
+        with:
+          fallback: 1.0.0
+      - name: New Tag
+        id: newtag
+        uses: WyriHaximus/github-action-next-semvers@master
+        with:
+          version: ${{ steps.previoustag.outputs.tag }}
       - name: Environment
+        id: environment
         run: |
           cd $GITHUB_WORKSPACE
           sudo bash env.sh
       - name: Build
+        id: build
         run: |
           cd $GITHUB_WORKSPACE
           sudo bash main.sh
           sudo chmod -R 0777 ./*
-      - name: Release‌‌
+      - name: Release
+        id: r‌‌elease
         uses: ncipollo/release-action@main
         with:
           name: "${{ github.workspace }}/out/name.txt"
-          tag: "${{ github.workspace }}/out/tag.txt"
+          tag: ${{ steps.newtag.outputs.patch }}
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
           artifacts: "${{ github.workspace }}/out/*"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cleanup
+        id: cleanup
         run:  |
           rm ${{ github.workspace }}/out/*
