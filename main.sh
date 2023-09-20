@@ -128,10 +128,6 @@ echo "
 - **LLD Version**: $LLD_VERSION
 " > bodyFile.md
 echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > name.txt
-echo "0000000001" > tag.txt
-cat bodyFile.md
-cat name.txt
-cat tag.txt
 
 # Finish
 msg "Done"
