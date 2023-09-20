@@ -1,8 +1,5 @@
 name: CI Build
-
-on:
-  workflow_dispatch:
-
+on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,17 +7,17 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@main
+        with:
+          persist-credentials: false
+          fetch-depth: 0
       - name: Tag
         run: |
           echo "BUILD_TIME=$(TZ=Europe/Berlin date +%s | md5sum | awk '{print substr($1,1,10)}')" >> $GITHUB_ENV
-
       - name: Environment
         run: |
           cd $GITHUB_WORKSPACE
           sudo bash env.sh
-
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
@@ -28,7 +25,6 @@ jobs:
           sudo chmod -R 0777 ./*
           echo "RELEASE_NAME=$(cat "$GITHUB_WORKSPACE/out/RELEASETITLE.txt")" >> $GITHUB_ENV
           echo "${{ env.RELEASE_NAME }}"
-
       - name: Release‌‌
         uses: ncipollo/release-action@v1
         with:
