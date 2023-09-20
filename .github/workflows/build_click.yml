@@ -30,12 +30,13 @@ jobs:
           cd $GITHUB_WORKSPACE
           sudo bash main.sh
           sudo chmod -R 0777 ./*
+          echo "name=$(cat "$GITHUB_WORKSPACE/out/name.txt")" >> $GITHUB_ENV
           echo "filename=$(cat "$GITHUB_WORKSPACE/out/filename.txt")" >> $GITHUB_ENV
       - name: Release
         id: upload
         uses: ncipollo/release-action@main
         with:
-          name: "${{ github.workspace }}/out/name.txt"
+          name: "${{ github.workspace }}/out/${{ env.name }}"
           tag: ${{ steps.newtag.outputs.patch }}
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
