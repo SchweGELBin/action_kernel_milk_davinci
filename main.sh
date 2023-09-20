@@ -128,7 +128,7 @@ echo "
 - **LLD Version**: $LLD_VERSION
 " > bodyFile.md
 echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > name.txt
-echo "$KERNEL_NAME" > filename.txt
+echo "$KERNEL_NAME.zip" > filename.txt
 
 # Finish
 msg "Done"
