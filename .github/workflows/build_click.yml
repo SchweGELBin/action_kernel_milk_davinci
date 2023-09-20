@@ -32,7 +32,7 @@ jobs:
           sudo chmod -R 0777 ./*
           echo "filename=$(cat "$GITHUB_WORKSPACE/out/filename.txt")" >> $GITHUB_ENV
       - name: Release
-        id: r‌‌elease
+        id: upload
         uses: ncipollo/release-action@main
         with:
           name: "${{ github.workspace }}/out/name.txt"
