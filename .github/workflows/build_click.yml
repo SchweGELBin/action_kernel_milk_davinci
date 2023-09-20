@@ -30,6 +30,7 @@ jobs:
           cd $GITHUB_WORKSPACE
           sudo bash main.sh
           sudo chmod -R 0777 ./*
+          echo "filename=$(cat "$GITHUB_WORKSPACE/out/filename.txt")" >> $GITHUB_ENV
       - name: Release
         id: r‌‌elease
         uses: ncipollo/release-action@main
@@ -38,7 +39,7 @@ jobs:
           tag: ${{ steps.newtag.outputs.patch }}
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
-          artifacts: "${{ github.workspace }}/out/*"
+          artifacts: "${{ github.workspace }}/out/${{ env.filename }}"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cleanup
         id: cleanup
