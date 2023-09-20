@@ -21,10 +21,10 @@ jobs:
       - name: Release‌‌
         uses: ncipollo/release-action@main
         with:
-          name: "${{ github.workspace }}/out/RELEASETITLE.txt"
-          tag: "${{ github.workspace }}/out/TAG.txt"
+          name: "${{ github.workspace }}/out/name.txt"
+          tag: "${{ github.workspace }}/out/tag.txt"
           allowUpdates: false
-          bodyFile: "${{ github.workspace }}/out/RELEASE.md"
+          bodyFile: "${{ github.workspace }}/out/bodyFile.md"
           artifacts: "${{ github.workspace }}/out/*"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cleanup
