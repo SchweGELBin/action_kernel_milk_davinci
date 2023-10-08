@@ -12,7 +12,9 @@ CLANG_DIR="$WORKDIR/Clang/bin"
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
 KERNEL_BRANCHE="13"
+ANDROID_VERSION="13"
 
+KERNEL_SOURCE=${KERNEL_GIT::-4}
 KERNEL_DIR="$WORKDIR/$KERNEL_NAME"
 
 # Anykernel3 Data
@@ -55,6 +57,14 @@ LLD_VERSION="$($CLANG_DIR/ld.lld --version | head -n 1 | cut -f1 -d "(" | sed 's
 
 msg "Kernel"
 git clone --depth=1 $KERNEL_GIT -b $KERNEL_BRANCHE $KERNEL_DIR
+
+KERNEL_VERSION=$(cat $KERNEL_DIR/Makefile | grep -w "VERSION =" | cut -d '=' -f 2 | cut -b 2-)\
+.$(cat $KERNEL_DIR/Makefile | grep -w "PATCHLEVEL =" | cut -d '=' -f 2 | cut -b 2-)\
+.$(cat $KERNEL_DIR/Makefile | grep -w "SUBLEVEL =" | cut -d '=' -f 2 | cut -b 2-)\
+.$(cat $KERNEL_DIR/Makefile | grep -w "EXTRAVERSION =" | cut -d '=' -f 2 | cut -b 2-)
+
+[ ${KERNEL_VERSION: -1} = "." ] && KERNEL_VERSION=$KERNEL_VERSION{KERNEL_VERSION::-1}
+
 cd $KERNEL_DIR
 
 msg "KernelSU"
@@ -94,7 +104,7 @@ LLVM_IAS=1"
 
 rm -rf out
 make O=out $args $DEVICE_DEFCONFIG
-KERNEL_VERSION=$(make O=out $args kernelversion | grep "4.14")
+make O=out $args kernelversion
 make O=out $args -j"$(nproc --all)"
 msg "Kernel version: $KERNEL_VERSION"
 
@@ -121,11 +131,25 @@ msg "Release Files"
 echo "
 ## $KERNEL_NAME
 - **Time**: $TIME # CET
+
+` `  
+
 - **Codename**: $DEVICE_CODE
+- **Android Version**: $ANDROID_VERSION
+
+` `  
+
 - **Kernel Version**: $KERNEL_VERSION
 - **KernelSU Version**: $KERNELSU_VERSION
+
+` `  
+
 - **CLANG Version**: $CLANG_VERSION
 - **LLD Version**: $LLD_VERSION
+
+` `  
+
+- **Kernel Source**: $KERNEL_SOURCE
 " > bodyFile.md
 echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > name.txt
 echo "$KERNEL_NAME.zip" > filename.txt
