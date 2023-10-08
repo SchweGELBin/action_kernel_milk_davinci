@@ -2,20 +2,16 @@
 
 WORKDIR="$(pwd)"
 
+# Changable Data:
+
 # Clang Data
 CLANG_REPO="ZyCromerZ/Clang"
-
-CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
-CLANG_DIR="$WORKDIR/Clang/bin"
 
 # Kernel Data
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
 KERNEL_BRANCHE="13"
 ANDROID_VERSION="13"
-
-KERNEL_SOURCE=${KERNEL_GIT::-4}
-KERNEL_DIR="$WORKDIR/$KERNEL_NAME"
 
 # Anykernel3 Data
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
@@ -25,6 +21,14 @@ ANYKERNEL3_BRANCHE="master"
 DEVICE_CODE="davinci"
 DEVICE_DEFCONFIG="davinci_defconfig"
 DEVICE_ARCH="arch/arm64"
+
+
+CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest\
+| grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
+CLANG_DIR="$WORKDIR/Clang/bin"
+
+KERNEL_SOURCE=${KERNEL_GIT::-4}/
+KERNEL_DIR="$WORKDIR/$KERNEL_NAME"
 
 DEVICE_DEFCONFIG_FILE="$KERNEL_DIR/$DEVICE_ARCH/configs/$DEVICE_DEFCONFIG"
 IMAGE="$KERNEL_DIR/out/$DEVICE_ARCH/boot/Image.gz"
@@ -63,7 +67,8 @@ KERNEL_VERSION=$(cat $KERNEL_DIR/Makefile | grep -w "VERSION =" | cut -d '=' -f 
 .$(cat $KERNEL_DIR/Makefile | grep -w "SUBLEVEL =" | cut -d '=' -f 2 | cut -b 2-)\
 .$(cat $KERNEL_DIR/Makefile | grep -w "EXTRAVERSION =" | cut -d '=' -f 2 | cut -b 2-)
 
-[ ${KERNEL_VERSION: -1} = "." ] && KERNEL_VERSION=$KERNEL_VERSION{KERNEL_VERSION::-1}
+[ ${KERNEL_VERSION: -1} = "." ] && KERNEL_VERSION=${KERNEL_VERSION::-1}
+msg "Kernel Version: $KERNEL_VERSION"
 
 cd $KERNEL_DIR
 
@@ -132,22 +137,22 @@ echo "
 ## $KERNEL_NAME
 - **Time**: $TIME # CET
 
-` `  
+<br>
 
 - **Codename**: $DEVICE_CODE
 - **Android Version**: $ANDROID_VERSION
 
-` `  
+<br>
 
 - **Kernel Version**: $KERNEL_VERSION
 - **KernelSU Version**: $KERNELSU_VERSION
 
-` `  
+<br>
 
 - **CLANG Version**: $CLANG_VERSION
 - **LLD Version**: $LLD_VERSION
 
-` `  
+<br>
 
 - **Kernel Source**: $KERNEL_SOURCE
 " > bodyFile.md
