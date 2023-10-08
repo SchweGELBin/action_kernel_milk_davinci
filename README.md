@@ -1,6 +1,6 @@
 # MilkKernel - Action
 
-**Dynamic Kernel, based on Vantom**
+**Dynamic Kernel, based on VantomSyndra**
 
 **For davinci | Mi 9T / Redmi K20**
 
@@ -17,7 +17,7 @@
 - Run Action "CI Build"
 
 ## Thanks / Credits
-**[vantoman](https://github.com/vantoman/)** for the kernel
+**[Kenvyra](https://github.com/Kenvyra)** for the kernel
 
 **[AMWolfstein](https://github.com/AMWolfstein)** for the build script
 
