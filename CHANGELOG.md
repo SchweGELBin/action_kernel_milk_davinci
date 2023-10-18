@@ -4,6 +4,6 @@
 ## v1.0.x
 - Based on **[Vantom](https://github.com/vantoman/kernel_xiaomi_sm6150)** Kernel
 
-## pre v0.x
+## v0.x
 - *deleted*
 - Based on **[Vantom](https://github.com/vantoman/kernel_xiaomi_sm6150)** Kernel
