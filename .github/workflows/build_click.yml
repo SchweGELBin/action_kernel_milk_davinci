@@ -1,5 +1,12 @@
 name: CI Build
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      customtag:
+        description: 'Custom Tag'
+        required: false
+        default: '1.0.0'
+        type: number
 jobs:
   build:
     runs-on: ubuntu-latest
