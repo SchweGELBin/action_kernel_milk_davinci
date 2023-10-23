@@ -1,12 +1,5 @@
 name: CI Build
-on:
-  workflow_dispatch:
-    inputs:
-      customtag:
-        description: 'Custom Tag'
-        required: false
-        default: '1.0.0'
-        type: number
+on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,8 +7,6 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@main
-        with:
-          fetch-depth: 0
       - name: Previous Tag
         id: previoustag
         uses: WyriHaximus/github-action-get-previous-tag@master
