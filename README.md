@@ -1,4 +1,4 @@
-# MilkKernel - Action
+# MilkKernel
 
 **Dynamic Kernel, based on VantomSyndra**
 
@@ -10,6 +10,7 @@
 
 - Download **[latest release](https://github.com/SchweGELBin/action_kernel_milk_davinci/releases/latest/download/MilkKernel.zip)**
 - Flash via Recovery
+- Optional: Download **[latest release](https://github.com/tiann/KernelSU/releases/latest/)** of KernelSU Manager (KernelSU_*-release.apk)
 
 ## Build
 
@@ -17,12 +18,9 @@
 - Run Action "CI Build"
 
 ## Thanks / Credits
-**[Kenvyra](https://github.com/Kenvyra)** for the kernel
-
-**[AMWolfstein](https://github.com/AMWolfstein)** for the build script
-
-**[osm0sis](https://github.com/osm0sis)** for the packaging
-
-**[ZyCromerZ](https://github.com/ZyCromerZ)** for the clang build
-
-**[llvm](https://github.com/llvm)** for the compiler/toolchain
+- **[Kenvyra](https://github.com/Kenvyra)** for the kernel
+- **[tiann](https://github.com/tiann)** for KernelSU
+- **[AMWolfstein](https://github.com/AMWolfstein)** for the build script
+- **[osm0sis](https://github.com/osm0sis)** for the packaging
+- **[ZyCromerZ](https://github.com/ZyCromerZ)** for the clang build
+- **[llvm](https://github.com/llvm)** for the compiler/toolchain
