@@ -18,9 +18,10 @@
 - Run Action "CI Build"
 
 ## Thanks / Credits
-- **[Kenvyra](https://github.com/Kenvyra)** and **[LineageOS](https://github.com/LineageOS)** for the kernel
-- **[tiann](https://github.com/tiann)** for KernelSU
-- **[AMWolfstein](https://github.com/AMWolfstein)** for the build script
-- **[osm0sis](https://github.com/osm0sis)** for the packaging
-- **[ZyCromerZ](https://github.com/ZyCromerZ)** for the clang build
-- **[llvm](https://github.com/llvm)** for the compiler/toolchain
+- **[Kenvyra](https://github.com/Kenvyra/android_kernel_xiaomi_sm6150/)** and **[LineageOS](https://github.com/LineageOS/android_kernel_xiaomi_sm6150/)** for the kernel
+- **[tiann](https://github.com/tiann/KernelSU/)** for KernelSU
+- **[AMWolfstein](https://github.com/AMWolfstein/action_kernelsu/)** for the build script
+- **[osm0sis](https://github.com/osm0sis/AnyKernel3/)** for the packaging
+- **[ZyCromerZ](https://github.com/ZyCromerZ/Clang/)** for the clang build
+- **[llvm](https://github.com/llvm/llvm-project/)** for the compiler/toolchain
+- For more credits, visit their repositories
