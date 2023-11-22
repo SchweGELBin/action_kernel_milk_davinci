@@ -1,6 +1,6 @@
 # MilkKernel
 
-**Dynamic Kernel, based on VantomSyndra**
+**Dynamic Kernel**
 
 **For davinci | Mi 9T / Redmi K20**
 
