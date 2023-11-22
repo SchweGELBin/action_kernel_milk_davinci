@@ -10,12 +10,12 @@ CLANG_REPO="ZyCromerZ/Clang"
 # Kernel Data
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
-KERNEL_BRANCHE="13"
+KERNEL_BRANCH="kenvyra-13.0"
 ANDROID_VERSION="13"
 
 # Anykernel3 Data
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
-ANYKERNEL3_BRANCHE="master"
+ANYKERNEL3_BRANCH="master"
 
 # Build Data
 DEVICE_CODE="davinci"
@@ -27,7 +27,8 @@ CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest\
 | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
 CLANG_DIR="$WORKDIR/Clang/bin"
 
-KERNEL_SOURCE=${KERNEL_GIT::-4}/
+KERNEL_REPO=${KERNEL_GIT::-4}/
+KERNEL_SOURCE=${KERNEL_REPO::-1}/tree/$KERNEL_BRANCH
 KERNEL_DIR="$WORKDIR/$KERNEL_NAME"
 
 DEVICE_DEFCONFIG_FILE="$KERNEL_DIR/$DEVICE_ARCH/configs/$DEVICE_DEFCONFIG"
@@ -60,7 +61,7 @@ CLANG_VERSION="$($CLANG_DIR/clang --version | head -n 1 | cut -f1 -d "(" | sed '
 LLD_VERSION="$($CLANG_DIR/ld.lld --version | head -n 1 | cut -f1 -d "(" | sed 's/.$//')"
 
 msg "Kernel"
-git clone --depth=1 $KERNEL_GIT -b $KERNEL_BRANCHE $KERNEL_DIR
+git clone --depth=1 $KERNEL_GIT -b $KERNEL_BRANCH $KERNEL_DIR
 
 KERNEL_VERSION=$(cat $KERNEL_DIR/Makefile | grep -w "VERSION =" | cut -d '=' -f 2 | cut -b 2-)\
 .$(cat $KERNEL_DIR/Makefile | grep -w "PATCHLEVEL =" | cut -d '=' -f 2 | cut -b 2-)\
@@ -116,7 +117,7 @@ msg "Kernel version: $KERNEL_VERSION"
 # Package
 msg "Package"
 cd $WORKDIR
-git clone --depth=1 $ANYKERNEL3_GIT -b $ANYKERNEL3_BRANCHE $WORKDIR/Anykernel3
+git clone --depth=1 $ANYKERNEL3_GIT -b $ANYKERNEL3_BRANCH $WORKDIR/Anykernel3
 cd $WORKDIR/Anykernel3
 cp $IMAGE .
 cp $DTB $WORKDIR/Anykernel3/dtb
@@ -154,7 +155,8 @@ echo "
 
 <br>
 
-- **Kernel Source**: $KERNEL_SOURCE
+- **[Kernel Repo]($KERNEL_REPO)**
+- **[Kernel Source]($KERNEL_SOURCE)**
 " > bodyFile.md
 echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > name.txt
 echo "$KERNEL_NAME.zip" > filename.txt
