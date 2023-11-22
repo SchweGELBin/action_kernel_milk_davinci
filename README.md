@@ -18,7 +18,7 @@
 - Run Action "CI Build"
 
 ## Thanks / Credits
-- **[Kenvyra](https://github.com/Kenvyra)** for the kernel
+- **[Kenvyra](https://github.com/Kenvyra)** and **[LineageOS](https://github.com/LineageOS)** for the kernel
 - **[tiann](https://github.com/tiann)** for KernelSU
 - **[AMWolfstein](https://github.com/AMWolfstein)** for the build script
 - **[osm0sis](https://github.com/osm0sis)** for the packaging
