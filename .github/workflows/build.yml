@@ -4,6 +4,7 @@ jobs:
   build-manager:
     uses: ./.github/workflows/build-manager.yml
   build:
+    needs: build-manager
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
