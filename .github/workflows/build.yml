@@ -6,17 +6,17 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Previous Tag
         id: previoustag
-        uses: WyriHaximus/github-action-get-previous-tag@master
+        uses: WyriHaximus/github-action-get-previous-tag@v1
         with:
           fallback: 1.0.0
       - name: New Tag
         id: newtag
-        uses: WyriHaximus/github-action-next-semvers@master
+        uses: WyriHaximus/github-action-next-semvers@v1
         with:
           version: ${{ steps.previoustag.outputs.tag }}
       - name: Environment
@@ -34,7 +34,7 @@ jobs:
           echo "filename=$(cat "$GITHUB_WORKSPACE/out/filename.txt")" >> $GITHUB_ENV
       - name: Release
         id: upload
-        uses: ncipollo/release-action@main
+        uses: ncipollo/release-action@v1
         with:
           name: "${{ env.name }}"
           #tag: ${{ steps.newtag.outputs.minor }}
