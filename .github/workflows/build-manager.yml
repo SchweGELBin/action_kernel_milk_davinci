@@ -10,7 +10,7 @@ jobs:
         include:
           - target: aarch64-linux-android
           - target: x86_64-linux-android
-    uses: ./.github/workflows/ksud.yml
+    uses: ./ksu/.github/workflows/ksud.yml
     with:
       target: ${{ matrix.target }}
 
@@ -19,13 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./manager
+        working-directory: ./ksu/manager
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Write key
         if: ${{ github.ref == 'refs/heads/main' || github.ref_type == 'tag' }}
@@ -81,5 +77,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: manager
-          path: manager/app/build/outputs/apk/release/*.apk
+          path: ksu/manager/app/build/outputs/apk/release/KSU-Manager.apk
           
