@@ -1,6 +1,8 @@
 name: CI Build
 on: [workflow_dispatch]
 jobs:
+  build-manager:
+    uses: ./.github/workflows/build-manager.yml
   build:
     runs-on: ubuntu-latest
     steps:
@@ -8,13 +10,6 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-      - name: Checkout KernelSU Repo
-        id: checkoutksu
-        uses: actions/checkout@v4
-        with:
-          repository: tiann/kernelsu
-          path: '$GITHUB_WORKSPACE/ksu'
           fetch-depth: 0
       - name: Previous Tag
         id: previoustag
