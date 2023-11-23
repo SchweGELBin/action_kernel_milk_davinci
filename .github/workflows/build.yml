@@ -9,6 +9,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Checkout KernelSU Repo
+        id: checkoutksu
+        uses: actions/checkout@v4
+        with:
+          repository: tiann/kernelsu
+          path: '$GITHUB_WORKSPACE/ksu'
+          fetch-depth: 0
       - name: Previous Tag
         id: previoustag
         uses: WyriHaximus/github-action-get-previous-tag@v1
