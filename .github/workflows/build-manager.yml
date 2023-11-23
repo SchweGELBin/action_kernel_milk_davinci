@@ -65,6 +65,7 @@ jobs:
 
       - name: Copy ksud to app jniLibs
         run: |
+          cd $GITHUB_WORKSPACE/ksu/manager
           mkdir -p app/src/main/jniLibs/arm64-v8a
           mkdir -p app/src/main/jniLibs/x86_64
           cp -f ../aarch64-linux-android/release/ksud ../manager/app/src/main/jniLibs/arm64-v8a/libksud.so
@@ -72,6 +73,7 @@ jobs:
 
       - name: Build with Gradle
         run: |
+          cd $GITHUB_WORKSPACE/ksu/manager
           echo 'org.gradle.parallel=true' >> gradle.properties
           echo 'org.gradle.vfs.watch=true' >> gradle.properties
           echo 'org.gradle.jvmargs=-Xmx2048m' >> gradle.properties
