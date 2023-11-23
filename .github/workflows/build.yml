@@ -40,8 +40,8 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: "${{ env.name }}"
-          #tag: ${{ steps.newtag.outputs.minor }}
-          tag: ${{ steps.newtag.outputs.patch }}
+          tag: ${{ steps.newtag.outputs.minor }}
+          #tag: ${{ steps.newtag.outputs.patch }}
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
           artifacts: "${{ github.workspace }}/out/artifacts/*"
