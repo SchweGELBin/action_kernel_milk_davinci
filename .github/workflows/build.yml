@@ -1,10 +1,10 @@
 name: CI Build
 on: [workflow_dispatch]
 jobs:
-  build-manager:
-    uses: ./.github/workflows/build-manager.yml
+  #build-manager:
+    #uses: ./.github/workflows/build-manager.yml
   build:
-    needs: build-manager
+    #needs: build-manager
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
