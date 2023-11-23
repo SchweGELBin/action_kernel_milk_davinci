@@ -65,12 +65,11 @@ jobs:
 
       - name: Copy ksud to app jniLibs
         run: |
-          cd $GITHUB_WORKSPACE/
-          mkdir -p ksu/manager/app/src/main/jniLibs/arm64-v8a
-          mkdir -p ksu/manager/app/src/main/jniLibs/x86_64
-          echo $(ls out/ksud/arm64/)
-          cp -f out/ksud/arm64/ksud-aarch64-linux-android ksu/manager/app/src/main/jniLibs/arm64-v8a/libksud.so
-          cp -f out/ksud/x86_64/ksud-x86_64-linux-android ksu/manager/app/src/main/jniLibs/x86_64/libksud.so
+          cd $GITHUB_WORKSPACE
+          mkdir -p /ksu/manager/app/src/main/jniLibs/arm64-v8a
+          mkdir -p /ksu/manager/app/src/main/jniLibs/x86_64
+          cp -f /out/ksud/arm64/ksud* /ksu/manager/app/src/main/jniLibs/arm64-v8a/libksud.so
+          cp -f /out/ksud/x86_64/ksud* /ksu/manager/app/src/main/jniLibs/x86_64/libksud.so
 
       - name: Build with Gradle
         run: |
