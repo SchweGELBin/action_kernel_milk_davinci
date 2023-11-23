@@ -22,17 +22,17 @@ jobs:
     - run: rustup default 1.67.0
     - uses: Swatinem/rust-cache@v2
       with:
-        workspaces: userspace/ksud
+        workspaces: ksu/userspace/ksud
         cache-targets: false
 
     - name: Install cross
       run: cargo install cross
 
     - name: Build ksud
-      run: cross build --target ${{ inputs.target }} --release --manifest-path ./userspace/ksud/Cargo.toml
+      run: cross build --target ${{ inputs.target }} --release --manifest-path ./ksu/userspace/ksud/Cargo.toml
 
     - name: Upload ksud artifact
       uses: actions/upload-artifact@v3
       with:
         name: ksud-${{ inputs.target }}
-        path: userspace/ksud/target/**/release/ksud
+        path: ksu/userspace/ksud/target/**/release/ksud
