@@ -60,12 +60,12 @@ jobs:
           name: ksud-x86_64-linux-android
           path: ksu/manager/app/src/main/jniLibs/x86_64
 
-      - name: rename ksud to libksud.so
+      - name: Rename ksud to libksud.so
         run: |
           cd ksu/manager/app/src/main/jniLibs
-          rename -f ./arm64-v8a/* libksud.so
-          rename -f ./x86_64/* libksud.so
-
+          cd arm64-v8a && cp -f ksud* libksud.so && rm ksud*
+          cd x86_64 && cp -f ksud* libksud.so && rm ksud*
+          
       - name: Build with Gradle
         run: |
           cd ksu/manager
