@@ -10,7 +10,7 @@ jobs:
         include:
           - target: aarch64-linux-android
           - target: x86_64-linux-android
-    uses: ./ksu/.github/workflows/ksud.yml
+    uses: ./.github/workflows/ksud.yml
     with:
       target: ${{ matrix.target }}
 
@@ -22,7 +22,13 @@ jobs:
         working-directory: ./ksu/manager
 
     steps:
-
+      - name: Checkout KernelSU Repo
+        uses: actions/checkout@v4
+        with:
+          repository: tiann/kernelsu
+          path: './ksu'
+          fetch-depth: 0
+          
       - name: Write key
         if: ${{ github.ref == 'refs/heads/main' || github.ref_type == 'tag' }}
         run: |
