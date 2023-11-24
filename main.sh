@@ -132,7 +132,6 @@ TIME=$(TZ='Europe/Berlin' date +"%Y-%m-%d %H:%M:%S")
 ZIP_NAME="$KERNEL_NAME.zip"
 find ./ * -exec touch -m -d "$TIME" {} \;
 zip -r9 $ZIP_NAME *
-mkdir -p $WORKDIR/out/artifacts
 cp *.zip $WORKDIR/out/artifacts
 
 cd $WORKDIR/out
