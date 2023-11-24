@@ -81,5 +81,5 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
-          name: manager
+          name: Manager.apk
           path: manager/app/build/outputs/apk/release/*.apk
