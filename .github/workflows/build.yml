@@ -26,7 +26,7 @@ jobs:
           echo "name=$(cat "$GITHUB_WORKSPACE/out/name.txt")" >> $GITHUB_ENV
           echo "filename=$(cat "$GITHUB_WORKSPACE/out/filename.txt")" >> $GITHUB_ENV
       - name: Release
-        id: upload
+        id: release
         uses: ncipollo/release-action@v1
         with:
           name: "${{ env.name }}"
@@ -37,4 +37,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cleanup
         id: cleanup
-        run: rm ${{ github.workspace }}/out/*
+        run: rm -r ${{ github.workspace }}/out/*
