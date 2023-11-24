@@ -21,16 +21,16 @@ jobs:
           cd $GITHUB_WORKSPACE
           sudo bash env.sh
           
-      - name: Download Manager.apk
+      - name: Download manager
         uses: actions/download-artifact@v3
         with:
-          name: Manager.apk
+          name: KernelSU*.apk
           path: .
 
       - name: Copy Manager.apk
         run: |
           cd $GITHUB_WORKSPACE
-          cp ./Manager.apk ./out/artifacts/Manager.apk
+          cp ./KernelSU*.apk ./out/artifacts/Manager.apk
           
       - name: Build
         id: build
