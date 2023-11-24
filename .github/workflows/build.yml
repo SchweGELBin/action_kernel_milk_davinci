@@ -1,10 +1,10 @@
 name: CI Build
 on: [workflow_dispatch]
 jobs:
-  #build-manager:
-    #uses: ./.github/workflows/build-manager.yml
+  build-manager:
+    uses: ./.github/workflows/build-manager.yml
   build:
-    #needs: build-manager
+    needs: build-manager
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -12,16 +12,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Previous Tag
-        id: previoustag
-        uses: WyriHaximus/github-action-get-previous-tag@v1
-        with:
-          fallback: 1.0.0
-      - name: New Tag
-        id: newtag
-        uses: WyriHaximus/github-action-next-semvers@v1
-        with:
-          version: ${{ steps.previoustag.outputs.tag }}
       - name: Environment
         id: environment
         run: |
@@ -40,13 +30,11 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: "${{ env.name }}"
-          tag: ${{ steps.newtag.outputs.minor }}
-          #tag: ${{ steps.newtag.outputs.patch }}
+          tag: v1
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
           artifacts: "${{ github.workspace }}/out/artifacts/*"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cleanup
         id: cleanup
-        run:  |
-          rm ${{ github.workspace }}/out/*
+        run: rm ${{ github.workspace }}/out/*
