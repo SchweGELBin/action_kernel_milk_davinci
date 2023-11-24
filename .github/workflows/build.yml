@@ -1,8 +1,10 @@
 name: CI Build
 on: [workflow_dispatch]
+
 jobs:
   build-manager:
     uses: ./.github/workflows/build-manager.yml
+    
   build:
     needs: build-manager
     runs-on: ubuntu-latest
@@ -12,11 +14,24 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          
       - name: Environment
         id: environment
         run: |
           cd $GITHUB_WORKSPACE
           sudo bash env.sh
+          
+      - name: Download Manager.apk
+        uses: actions/download-artifact@v3
+        with:
+          name: Manager.apk
+          path: .
+
+      - name: Copy Manager.apk
+        run: |
+          cd $GITHUB_WORKSPACE
+          cp ./Manager.apk ./out/artifacts/Manager.apk
+          
       - name: Build
         id: build
         run: |
@@ -25,16 +40,18 @@ jobs:
           sudo chmod -R 0777 ./*
           echo "name=$(cat "$GITHUB_WORKSPACE/out/name.txt")" >> $GITHUB_ENV
           echo "filename=$(cat "$GITHUB_WORKSPACE/out/filename.txt")" >> $GITHUB_ENV
+          
       - name: Release
         id: release
         uses: ncipollo/release-action@v1
         with:
           name: "${{ env.name }}"
-          tag: v1
+          tag: v2
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
           artifacts: "${{ github.workspace }}/out/artifacts/*"
           token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Cleanup
         id: cleanup
         run: rm -r ${{ github.workspace }}/out/*
