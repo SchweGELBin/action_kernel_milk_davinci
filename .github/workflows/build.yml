@@ -24,7 +24,7 @@ jobs:
       - name: Download manager
         uses: actions/download-artifact@v3
         with:
-          name: KernelSU*.apk
+          name: manager
           path: .
 
       - name: Copy Manager.apk
