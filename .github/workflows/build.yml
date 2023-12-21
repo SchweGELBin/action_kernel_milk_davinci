@@ -42,7 +42,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: "${{ env.name }}"
-          tag: v4
+          tag: v1
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
           artifacts: "${{ github.workspace }}/out/artifacts/*"
