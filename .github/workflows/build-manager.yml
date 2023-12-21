@@ -28,6 +28,10 @@ jobs:
           repository: tiann/KernelSU
           fetch-depth: 0
 
+      - name: Environment
+        id: environment
+        run: sudo bash env.sh
+
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
