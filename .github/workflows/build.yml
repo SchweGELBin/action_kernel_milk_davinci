@@ -20,8 +20,16 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           sudo bash env.sh
+      - name: Get Tag
+        id: tag
+        run: |
+          latest_tag=$(curl -s https://api.github.com/repos/SchweGELBin/action_kernel_milk_davinci/releases/latest | grep "tag_name" | cut -d '"' -f 4)
+          if [[ -z "$latest_tag" ]]; then latest_tag = 'v0'
+          tag=$latest_tag
+          echo "tag=$tag" >> $GITHUB_ENV
           
       - name: Download manager
+        id: manager
         uses: actions/download-artifact@v3
         with:
           name: manager
@@ -42,7 +50,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: "${{ env.name }}"
-          tag: v1
+          tag: "${{ env.tag }}"
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
           artifacts: "${{ github.workspace }}/out/artifacts/*"
