@@ -17,14 +17,14 @@ jobs:
       with:
         repository: tiann/KernelSU
         fetch-depth: 0
-    - run: rustup default 1.67.0
+    - run: rustup default 1.67.0 # Hotfix, should get removed later
     - uses: Swatinem/rust-cache@v2
       with:
         workspaces: userspace/ksud
         cache-targets: false
           
     - name: Install cross
-      run: cargo install cross --locked
+      run: cargo install cross --locked # Hotfix, "--locked" should get removed later
 
     - name: Build ksud
       run: cross build --target ${{ inputs.target }} --release --manifest-path ./userspace/ksud/Cargo.toml
