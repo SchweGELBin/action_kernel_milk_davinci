@@ -13,6 +13,9 @@ KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
 KERNEL_BRANCH="kenvyra-13.0"
 ANDROID_VERSION="13"
 
+# KernelSU Data
+KERNELSU_REPO="SchweGELBin/KernelSU"
+
 # Anykernel3 Data
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
 ANYKERNEL3_BRANCH="master"
@@ -75,7 +78,7 @@ msg "Kernel Version: $KERNEL_VERSION"
 cd $KERNEL_DIR
 
 msg "KernelSU"
-curl -LSs "https://raw.githubusercontent.com/SchweGELBin/KernelSU/main/kernel/setup.sh" | bash -s main
+curl -LSs "https://raw.githubusercontent.com/$KERNELSU_REPO/main/kernel/setup.sh" | bash -s main
 
 echo "CONFIG_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
 echo "CONFIG_HAVE_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
@@ -161,6 +164,7 @@ echo "
 
 - **[Kernel Repo]($KERNEL_REPO)**
 - **[Kernel Source]($KERNEL_SOURCE)**
+- **[KernelSU Repo](https://github.com/$KERNELSU_REPO)**
 " > bodyFile.md
 echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > name.txt
 echo "$KERNEL_NAME.zip" > filename.txt
