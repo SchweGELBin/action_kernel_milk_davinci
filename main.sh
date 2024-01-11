@@ -58,6 +58,7 @@ tar -C Clang/ -zxvf Clang.tar.gz
 rm -rf Clang.tar.gz
 
 CLANG_VERSION="$($CLANG_DIR/clang --version | head -n 1 | cut -f1 -d "(" | sed 's/.$//')"
+CLANG_VERSION=${CLANG_VERSION::-3} # May get removed later
 LLD_VERSION="$($CLANG_DIR/ld.lld --version | head -n 1 | cut -f1 -d "(" | sed 's/.$//')"
 
 msg "Kernel"
