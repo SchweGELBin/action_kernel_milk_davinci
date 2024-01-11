@@ -75,7 +75,7 @@ msg "Kernel Version: $KERNEL_VERSION"
 cd $KERNEL_DIR
 
 msg "KernelSU"
-curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s main
+curl -LSs "https://raw.githubusercontent.com/SchweGELBin/KernelSU/main/kernel/setup.sh" | bash -s main
 
 echo "CONFIG_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
 echo "CONFIG_HAVE_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
