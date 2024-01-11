@@ -72,9 +72,6 @@ KERNEL_VERSION=$(cat $KERNEL_DIR/Makefile | grep -w "VERSION =" | cut -d '=' -f 
 [ ${KERNEL_VERSION: -1} = "." ] && KERNEL_VERSION=${KERNEL_VERSION::-1}
 msg "Kernel Version: $KERNEL_VERSION"
 
-# Test
-echo "$(ksud debug get-sign *)"
-
 cd $KERNEL_DIR
 
 msg "KernelSU"
