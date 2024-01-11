@@ -147,6 +147,8 @@ echo "
 
 <br>
 
+- **Checkout following [README](https://github.com/SchweGELBin/kernel_milk_davinci/blob/master/README.md)**
+
 - **Codename**: $DEVICE_CODE
 - **Android Version**: $ANDROID_VERSION
 
