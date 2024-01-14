@@ -25,7 +25,7 @@ DEVICE_CODE="davinci"
 DEVICE_DEFCONFIG="davinci_defconfig"
 DEVICE_ARCH="arch/arm64"
 
-
+# Set variables
 CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest\
 | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
 CLANG_DIR="$WORKDIR/Clang/bin"
@@ -90,7 +90,7 @@ msg "KernelSU Version: $KERNELSU_VERSION"
 
 sed -i "/CONFIG_LOCALVERSION=/c\CONFIG_LOCALVERSION=\"-$KERNELSU_VERSION-$KERNEL_NAME\"/" $DEVICE_DEFCONFIG_FILE
 
-#Build
+# Build
 msg "Build"
 
 args="PATH=$CLANG_DIR:$PATH \
