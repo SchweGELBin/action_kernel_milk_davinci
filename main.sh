@@ -14,7 +14,8 @@ KERNEL_BRANCH="kenvyra-13.0"
 ANDROID_VERSION="13"
 
 # KernelSU Data
-KERNELSU_REPO="SchweGELBin/KernelSU"
+KERNELSU_REPO="tiann/KernelSU"
+REMOVE_SIG_VER="true"
 
 # Anykernel3 Data
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
@@ -89,6 +90,10 @@ KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10200))
 msg "KernelSU Version: $KERNELSU_VERSION"
 
 sed -i "/CONFIG_LOCALVERSION=/c\CONFIG_LOCALVERSION=\"-$KERNELSU_VERSION-$KERNEL_NAME\"/" $DEVICE_DEFCONFIG_FILE
+
+if [[ $REMOVE_SIG_VER == "true" ]]; then
+    sed -i "s/if (is_manager_apk(cwd)) {/if (1) {/" KernelSU/manager.c
+fi
 
 # Build
 msg "Build"
