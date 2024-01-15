@@ -92,7 +92,7 @@ msg "KernelSU Version: $KERNELSU_VERSION"
 sed -i "/CONFIG_LOCALVERSION=/c\CONFIG_LOCALVERSION=\"-$KERNELSU_VERSION-$KERNEL_NAME\"/" $DEVICE_DEFCONFIG_FILE
 
 if [[ $REMOVE_SIG_VER == "true" ]]; then
-    sed -i "s/if (is_manager_apk(cwd)) {/if (1) {/" KernelSU/manager.c
+    sed -i "s/if (is_manager_apk(cwd)) {/if (1) {/" KernelSU/kernel/manager.c
 fi
 
 # Build
