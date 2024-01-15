@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        repository: SchweGELBin/KernelSU
+        repository: tiann/KernelSU
         fetch-depth: 0
     - run: rustup default 1.67.0 # Hotfix, should get removed later
     - uses: Swatinem/rust-cache@v2
