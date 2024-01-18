@@ -4,9 +4,6 @@ WORKDIR="$(pwd)"
 
 # Changable Data:
 
-# Clang Data
-CLANG_REPO="ZyCromerZ/Clang"
-
 # Kernel Data
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
@@ -26,6 +23,9 @@ ANYKERNEL3_BRANCH="master"
 DEVICE_CODE="davinci"
 DEVICE_DEFCONFIG="davinci_defconfig"
 DEVICE_ARCH="arch/arm64"
+
+# Clang Data
+CLANG_REPO="ZyCromerZ/Clang"
 
 # Set variables
 CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest\
