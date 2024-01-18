@@ -16,7 +16,7 @@ ANDROID_VERSION="13"
 # KernelSU Data
 KERNELSU_REPO="tiann/KernelSU"
 REMOVE_SIG_VER="true"
-KSU_ENABLED="false"
+KSU_ENABLED="true"
 
 # Anykernel3 Data
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
