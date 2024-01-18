@@ -94,11 +94,12 @@ if [[ $KSU_ENABLED == "true" ]]; then
     msg "KernelSU Version: $KERNELSU_VERSION"
 
     TITLE=$TITLE-$KERNELSU_VERSION
+    sed -i "s/^CONFIG_LOCALVERSION=.*/CONFIG_LOCALVERSION=\"-$KERNELSU_VERSION-$KERNEL_NAME\"/" $DEVICE_DEFCONFIG_FILE
 else
     echo "KernelSU Disabled"
     KERNELSU_VERSION="Disabled"
+    sed -i "s/^CONFIG_LOCALVERSION=.*/CONFIG_LOCALVERSION=\"-$KERNEL_NAME\"/" $DEVICE_DEFCONFIG_FILE
 fi
-sed -i "s/^CONFIG_LOCALVERSION=.*/CONFIG_LOCALVERSION=$TITLE/" $DEVICE_DEFCONFIG_FILE
 
 if [[ $REMOVE_SIG_VER == "true" ]]; then
     sed -i "s/if (is_manager_apk(cwd)) {/if (1) {/" KernelSU/kernel/manager.c
