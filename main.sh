@@ -16,6 +16,7 @@ ANDROID_VERSION="13"
 # KernelSU Data
 KERNELSU_REPO="tiann/KernelSU"
 REMOVE_SIG_VER="true"
+KSU_ENABLED="true"
 
 # Anykernel3 Data
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
@@ -76,20 +77,28 @@ KERNEL_VERSION=$(cat $KERNEL_DIR/Makefile | grep -w "VERSION =" | cut -d '=' -f 
 [ ${KERNEL_VERSION: -1} = "." ] && KERNEL_VERSION=${KERNEL_VERSION::-1}
 msg "Kernel Version: $KERNEL_VERSION"
 
+TITLE=$KERNEL_NAME-$KERNEL_VERSION
+
 cd $KERNEL_DIR
 
 msg "KernelSU"
-curl -LSs "https://raw.githubusercontent.com/$KERNELSU_REPO/main/kernel/setup.sh" | bash -s main
+if [[ $KSU_ENABLED == "true" ]]; then
+    curl -LSs "https://raw.githubusercontent.com/$KERNELSU_REPO/main/kernel/setup.sh" | bash -s main
 
-echo "CONFIG_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
-echo "CONFIG_HAVE_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
-echo "CONFIG_KPROBE_EVENTS=y" >> $DEVICE_DEFCONFIG_FILE
+    echo "CONFIG_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
+    echo "CONFIG_HAVE_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
+    echo "CONFIG_KPROBE_EVENTS=y" >> $DEVICE_DEFCONFIG_FILE
 
-KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
-KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10200))
-msg "KernelSU Version: $KERNELSU_VERSION"
+    KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
+    KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10200))
+    msg "KernelSU Version: $KERNELSU_VERSION"
 
-sed -i "/CONFIG_LOCALVERSION=/c\CONFIG_LOCALVERSION=\"-$KERNELSU_VERSION-$KERNEL_NAME\"/" $DEVICE_DEFCONFIG_FILE
+    TITLE=$TITLE-$KERNELSU_VERSION
+else
+    echo "KernelSU Disabled"
+    KERNELSU_VERSION="Disabled"
+fi
+sed -i "/CONFIG_LOCALVERSION=/c\CONFIG_LOCALVERSION=\"-$TITLE\"/" $DEVICE_DEFCONFIG_FILE
 
 if [[ $REMOVE_SIG_VER == "true" ]]; then
     sed -i "s/if (is_manager_apk(cwd)) {/if (1) {/" KernelSU/kernel/manager.c
@@ -171,7 +180,7 @@ echo "
 - **[Kernel Source]($KERNEL_SOURCE)**
 - **[KernelSU Repo](https://github.com/$KERNELSU_REPO)**
 " > bodyFile.md
-echo "$KERNEL_NAME-$KERNEL_VERSION-$KERNELSU_VERSION" > name.txt
+echo "$TITLE" > name.txt
 echo "$KERNEL_NAME.zip" > filename.txt
 
 # Finish
