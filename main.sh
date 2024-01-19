@@ -1,29 +1,32 @@
 #!/usr/bin/env sh
 
-# Changable Data:
+# Changable Data
+# ------------------------------------------------------------
 
-# Kernel Data
+# Kernel
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
 KERNEL_BRANCH="kenvyra-13.0"
 ANDROID_VERSION="13"
 
-# KernelSU Data
+# KernelSU
 KERNELSU_REPO="tiann/KernelSU"
 REMOVE_SIG_VER="true"
 KSU_ENABLED="true"
 
-# Anykernel3 Data
+# Anykernel3
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
 ANYKERNEL3_BRANCH="master"
 
-# Build Data
+# Build
 DEVICE_CODE="davinci"
 DEVICE_DEFCONFIG="davinci_defconfig"
 DEVICE_ARCH="arch/arm64"
 
-# Clang Data
+# Clang
 CLANG_REPO="ZyCromerZ/Clang"
+
+# ------------------------------------------------------------
 
 # Set variables
 WORKDIR="$(pwd)"
