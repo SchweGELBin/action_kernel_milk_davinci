@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-WORKDIR="$(pwd)"
-
 # Changable Data:
 
 # Kernel Data
@@ -28,6 +26,8 @@ DEVICE_ARCH="arch/arm64"
 CLANG_REPO="ZyCromerZ/Clang"
 
 # Set variables
+WORKDIR="$(pwd)"
+
 CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest\
 | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
 CLANG_DIR="$WORKDIR/Clang/bin"
