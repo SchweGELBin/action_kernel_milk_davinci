@@ -35,9 +35,11 @@ CLANG_DLINK="$(curl -s https://api.github.com/repos/$CLANG_REPO/releases/latest\
 | grep -wo "https.*" | grep Clang-.*.tar.gz | sed 's/.$//')"
 CLANG_DIR="$WORKDIR/Clang/bin"
 
-KERNEL_REPO=${KERNEL_GIT::-4}/
-KERNEL_SOURCE=${KERNEL_REPO::-1}/tree/$KERNEL_BRANCH
+KERNEL_REPO="${KERNEL_GIT::-4}/"
+KERNEL_SOURCE="${KERNEL_REPO::-1}/tree/$KERNEL_BRANCH"
 KERNEL_DIR="$WORKDIR/$KERNEL_NAME"
+KERNELSU_SOURCE="https://github.com/$KERNELSU_REPO"
+README="https://github.com/SchweGELBin/kernel_milk_davinci/blob/master/README.md"
 
 DEVICE_DEFCONFIG_FILE="$KERNEL_DIR/$DEVICE_ARCH/configs/$DEVICE_DEFCONFIG"
 IMAGE="$KERNEL_DIR/out/$DEVICE_ARCH/boot/Image.gz"
@@ -160,7 +162,7 @@ cd $WORKDIR/out
 # Release Files
 msg "Release Files"
 echo "
-## [$KERNEL_NAME](https://github.com/SchweGELBin/kernel_milk_davinci/blob/master/README.md)
+## [$KERNEL_NAME]($README)
 - **Time**: $TIME # CET
 
 <br>
@@ -170,19 +172,13 @@ echo "
 
 <br>
 
-- **Kernel Version**: $KERNEL_VERSION
-- **KernelSU Version**: $KERNELSU_VERSION
+- **[Kernel]($KERNEL_SOURCE) Version**: $KERNEL_VERSION
+- **[KernelSU]($KERNELSU_SOURCE) Version**: $KERNELSU_VERSION
 
 <br>
 
 - **CLANG Version**: $CLANG_VERSION
 - **LLD Version**: $LLD_VERSION
-
-<br>
-
-- **[Kernel Repo]($KERNEL_REPO)**
-- **[Kernel Source]($KERNEL_SOURCE)**
-- **[KernelSU Repo](https://github.com/$KERNELSU_REPO)**
 " > bodyFile.md
 echo "$TITLE" > name.txt
 echo "$KERNEL_NAME.zip" > filename.txt
