@@ -38,7 +38,9 @@ CLANG_DIR="$WORKDIR/Clang/bin"
 KERNEL_REPO="${KERNEL_GIT::-4}/"
 KERNEL_SOURCE="${KERNEL_REPO::-1}/tree/$KERNEL_BRANCH"
 KERNEL_DIR="$WORKDIR/$KERNEL_NAME"
+
 KERNELSU_SOURCE="https://github.com/$KERNELSU_REPO"
+CLANG_SOURCE="https://github.com/$CLANG_REPO"
 README="https://github.com/SchweGELBin/kernel_milk_davinci/blob/master/README.md"
 
 DEVICE_DEFCONFIG_FILE="$KERNEL_DIR/$DEVICE_ARCH/configs/$DEVICE_DEFCONFIG"
@@ -177,7 +179,7 @@ echo "
 
 <br>
 
-- **CLANG Version**: $CLANG_VERSION
+- **[CLANG]($CLANG_SOURCE) Version**: $CLANG_VERSION
 - **LLD Version**: $LLD_VERSION
 " > bodyFile.md
 echo "$TITLE" > name.txt
