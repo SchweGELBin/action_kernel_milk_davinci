@@ -6,8 +6,8 @@
 # Kernel
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
-KERNEL_BRANCH="crdroid-14.0"
-ANDROID_VERSION="14"
+KERNEL_BRANCH="kenvyra-13.0"
+ANDROID_VERSION="13"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
