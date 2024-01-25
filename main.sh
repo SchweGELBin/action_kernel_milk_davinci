@@ -7,7 +7,6 @@
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
 KERNEL_BRANCH="kenvyra-13.0"
-ANDROID_VERSION="13"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
@@ -167,10 +166,7 @@ echo "
 ## [$KERNEL_NAME]($README)
 - **Time**: $TIME # CET
 
-<br>
-
 - **Codename**: $DEVICE_CODE
-- **Android Version**: $ANDROID_VERSION
 
 <br>
 
