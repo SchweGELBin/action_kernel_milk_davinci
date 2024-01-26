@@ -5,8 +5,10 @@
 
 # Kernel
 KERNEL_NAME="MilkKernel"
-KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
-KERNEL_BRANCH="lineage-20"
+#KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
+#KERNEL_BRANCH="kenvyra-13.0"
+KERNEL_GIT="https://github.com/DerpFest-Devices/kernel_xiaomi_sm6150.git"
+KERNEL_BRANCH="14"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
@@ -20,7 +22,7 @@ ANYKERNEL3_BRANCH="master"
 # Build
 DEVICE_CODE="davinci"
 #DEVICE_DEFCONFIG="davinci_defconfig"
-DEVICE_DEFCONFIG="vendor/davinci.config"
+DEVICE_DEFCONFIG="vendor/davinci_defconfig"
 DEVICE_ARCH="arch/arm64"
 
 # Clang
