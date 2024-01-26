@@ -5,10 +5,8 @@
 
 # Kernel
 KERNEL_NAME="MilkKernel"
-#KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
-#KERNEL_BRANCH="kenvyra-13.0"
-KERNEL_GIT="https://github.com/DerpFest-Devices/kernel_xiaomi_sm6150"
-KERNEL_BRANCH="14"
+KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
+KERNEL_BRANCH="kenvyra-13.0"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
