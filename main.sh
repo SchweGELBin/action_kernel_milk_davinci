@@ -6,7 +6,7 @@
 # Kernel
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
-KERNEL_BRANCH="kenvyra-13.0"
+KERNEL_BRANCH="pixelos-14.0"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
