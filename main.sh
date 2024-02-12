@@ -6,7 +6,7 @@
 # Kernel
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
-KERNEL_BRANCH="perf"
+KERNEL_BRANCH="pixelos-14.0"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
@@ -19,7 +19,7 @@ ANYKERNEL3_BRANCH="master"
 
 # Build
 DEVICE_CODE="davinci"
-DEVICE_DEFCONFIG="vendor/davinci_user_defconfig"
+DEVICE_DEFCONFIG="davinci_defconfig"
 DEVICE_ARCH="arch/arm64"
 
 # Clang
