@@ -5,8 +5,8 @@
 
 # Kernel
 KERNEL_NAME="MilkKernel"
-KERNEL_GIT="https://github.com/MetaException/msm-4.14.git"
-KERNEL_BRANCH="12.1"
+KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
+KERNEL_BRANCH="perf"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
