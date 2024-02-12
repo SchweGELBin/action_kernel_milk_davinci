@@ -19,7 +19,7 @@ ANYKERNEL3_BRANCH="master"
 
 # Build
 DEVICE_CODE="davinci"
-DEVICE_DEFCONFIG="davinci_defconfig"
+DEVICE_DEFCONFIG="vendor/davinci_user_defconfig"
 DEVICE_ARCH="arch/arm64"
 
 # Clang
