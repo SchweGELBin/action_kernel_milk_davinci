@@ -17,7 +17,7 @@ jobs:
       with:
         repository: tiann/KernelSU
         fetch-depth: 0
-    - run: rustup default 1.67.0 # Hotfix, should get removed later
+    - run: rustup update stable
     - uses: Swatinem/rust-cache@v2
       with:
         workspaces: userspace/ksud
