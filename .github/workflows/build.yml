@@ -3,15 +3,23 @@ name: CI Build
 on:
   workflow_dispatch:
     inputs:
-      build_ksu:
+      Build_KSU:
         required: true
         type: boolean
-      build_nonksu:
+      Build_NonKSU:
         required: true
         type: boolean
-      build_manager:
+      Build_Manager:
         required: true
         type: boolean
+      Kernel_Git:
+        required: false
+        type: string
+        default: https://github.com/SchweGELBin/kernel_milk_davinci.git
+      Kernel_Branch:
+        required: false
+        type: string
+        default: pixelos-14.0
       os:
         required: false
         type: string
@@ -51,6 +59,11 @@ jobs:
     needs: [env, build-manager, build-ksu, build-nonksu]
     runs-on: ${{ inputs.os }}
     steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Get Tag
         id: tag
         run: |
@@ -76,7 +89,6 @@ jobs:
           else
             echo "name=$(cat "$GITHUB_WORKSPACE/out/name.txt")" >> $GITHUB_ENV
           fi
-          echo "filename=$(cat "$GITHUB_WORKSPACE/out/filename.txt")" >> $GITHUB_ENV
           cp ./KernelSU*.apk ./out/artifacts/Manager.apk
           
       - name: Release
