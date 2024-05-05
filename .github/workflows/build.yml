@@ -79,26 +79,17 @@ jobs:
           echo "Latest Tag: $latest_tag"
           echo "tag=v$((${latest_tag:1} + 1))" >> $GITHUB_ENV
           
-      - name: Download manager
-        id: manager
+      - name: Download artifacts
+        id: artifacts
         uses: actions/download-artifact@v4
         with:
-          name: manager
-          path: .
+          path: $GITHUB_WORKSPACE/out/artifacts/.
           
       - name: Prepare Release
         id: prepare
         run: |
           cd $GITHUB_WORKSPACE
           sudo chmod -R 0777 ./*
-          if [[ -f $GITHUB_WORKSPACE/out/name-KSU.txt ]]; then
-            echo "name=$(cat "$GITHUB_WORKSPACE/out/name-KSU.txt")" >> $GITHUB_ENV
-          else
-            echo "name=$(cat "$GITHUB_WORKSPACE/out/name.txt")" >> $GITHUB_ENV
-          fi
-          if [[ -f ./KernelSU*.apk ]]; then
-            cp ./KernelSU*.apk ./out/artifacts/Manager.apk
-          fi
           
       - name: Release
         id: release
