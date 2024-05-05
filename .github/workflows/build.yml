@@ -41,9 +41,11 @@ jobs:
           sudo bash env.sh
 
   build-manager:
+    if: ${{ inputs.Build_Manager }}
     uses: ./.github/workflows/build-manager.yml
     
   build-ksu:
+    if: ${{ inputs.Build_KSU }}
     needs: env
     uses: ./.github/workflows/build-kernel.yml
     with:
@@ -52,6 +54,7 @@ jobs:
       kernel_branch: ${{ inputs.Kernel_Branch }}
 
   build-nonksu:
+    if: ${{ inputs.Build_NonKSU }}
     needs: env
     uses: ./.github/workflows/build-kernel.yml
     with:
