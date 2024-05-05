@@ -63,7 +63,7 @@ jobs:
       kernel_branch: ${{ inputs.Kernel_Branch }}
       
   build:
-    needs: [env, build-manager, build-ksu, build-nonksu]
+    needs: env
     runs-on: ${{ inputs.os }}
     steps:
       - name: Checkout
