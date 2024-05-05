@@ -88,6 +88,12 @@ TITLE=$KERNEL_NAME-$KERNEL_VERSION
 cd $KERNEL_DIR
 
 msg "KernelSU"
+if [[ $1 == "KSU" ]]; then
+    KSU_ENABLED="true"
+elif [[ $1 == "NonKSU" ]]; then
+    KSU_ENABLED="false"
+fi
+
 if [[ $KSU_ENABLED == "true" ]]; then
     curl -LSs "https://raw.githubusercontent.com/$KERNELSU_REPO/main/kernel/setup.sh" | bash -s main
 
@@ -100,7 +106,7 @@ if [[ $KSU_ENABLED == "true" ]]; then
     msg "KernelSU Version: $KERNELSU_VERSION"
 
     if [[ $REMOVE_SIG_VER == "true" ]]; then
-        sed -i "s/if (is_manager_apk(cwd)) {/if (1) {/" KernelSU/kernel/manager.c
+        # Signature Verification method changed
     fi
 
     TITLE=$TITLE-$KERNELSU_VERSION
