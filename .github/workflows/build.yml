@@ -18,35 +18,39 @@ on:
         default: ubuntu-latest
 
 jobs:
-  build-manager:
-    uses: ./.github/workflows/build-manager.yml
-    
-  build-ksu:
-    uses: ./.github/workflows/build-kernel.yml
-    with:
-      include_ksu: true
-
-  build-nonksu:
-    uses: ./.github/workflows/build-kernel.yml
-    with:
-      include_ksu: false
-      
-  build:
-    needs: [build-manager, build-ksu, build-nonksu]
+  env:
     runs-on: ${{ inputs.os }}
     steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          
       - name: Environment
         id: environment
         run: |
           cd $GITHUB_WORKSPACE
           sudo bash env.sh
-          
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+  build-manager:
+    uses: ./.github/workflows/build-manager.yml
+    
+  build-ksu:
+    needs: env
+    uses: ./.github/workflows/build-kernel.yml
+    with:
+      include_ksu: true
+
+  build-nonksu:
+    needs: env
+    uses: ./.github/workflows/build-kernel.yml
+    with:
+      include_ksu: false
+      
+  build:
+    needs: [env, build-manager, build-ksu, build-nonksu]
+    runs-on: ${{ inputs.os }}
+    steps:
       - name: Get Tag
         id: tag
         run: |
