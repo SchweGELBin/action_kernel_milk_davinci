@@ -157,8 +157,13 @@ cp $DTB $WORKDIR/Anykernel3/dtb
 cp $DTBO .
 
 # Archive
+if [[ $KSU_ENABLED == "true" ]]; then
+  ZIP_NAME="$KERNEL_NAME-KSU.zip"
+else
+  ZIP_NAME="$KERNEL_NAME.zip"
+fi
+
 TIME=$(TZ='Europe/Berlin' date +"%Y-%m-%d %H:%M:%S")
-ZIP_NAME="$KERNEL_NAME.zip"
 find ./ * -exec touch -m -d "$TIME" {} \;
 zip -r9 $ZIP_NAME *
 mkdir -p $WORKDIR/out/artifacts
