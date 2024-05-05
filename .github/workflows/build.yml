@@ -62,12 +62,16 @@ jobs:
           name: manager
           path: .
           
-      - name: Build
-        id: build
+      - name: Prepare Release
+        id: prepare
         run: |
           cd $GITHUB_WORKSPACE
           sudo chmod -R 0777 ./*
-          echo "name=$(cat "$GITHUB_WORKSPACE/out/name.txt")" >> $GITHUB_ENV
+          if [[ -f $GITHUB_WORKSPACE/out/name-KSU.txt ]]; then
+            echo "name=$(cat "$GITHUB_WORKSPACE/out/name-KSU.txt")" >> $GITHUB_ENV
+          else
+            echo "name=$(cat "$GITHUB_WORKSPACE/out/name.txt")" >> $GITHUB_ENV
+          fi
           echo "filename=$(cat "$GITHUB_WORKSPACE/out/filename.txt")" >> $GITHUB_ENV
           cp ./KernelSU*.apk ./out/artifacts/Manager.apk
           
