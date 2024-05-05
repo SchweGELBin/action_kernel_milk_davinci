@@ -10,7 +10,7 @@ KERNEL_BRANCH="pixelos-14.0"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
-REMOVE_SIG_VER="true"
+REMOVE_SIG_VER="false"
 KSU_ENABLED="true"
 
 # Anykernel3
