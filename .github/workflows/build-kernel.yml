@@ -31,3 +31,13 @@ jobs:
         run: |
             echo "Building ${{ inputs.include_ksu }}"
             sudo bash main.sh ${{ inputs.include_ksu }} ${{ inputs.kernel_git }} ${{ inputs.kernel_branch }}
+      - name: Upload Kernel
+        uses: actions/upload-artifact@v4
+        with:
+          name: Kernel-${{ inputs.include_ksu }}
+          path: out/artifacts/*.zip
+      - name: Upload bodyFile
+        uses: actions/upload-artifact@v4
+        with:
+          name: bodyFile-${{ inputs.include_ksu }}
+          path: out/bodyFile.md
