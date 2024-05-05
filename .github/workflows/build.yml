@@ -90,6 +90,10 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           sudo chmod -R 0777 ./*
+          if [[ -f $GITHUB_WORKSPACE/out/artifacts/*KSU*bodyFile* ]]; then
+            mv $GITHUB_WORKSPACE/out/artifacts/*KSU*bodyFile* $GITHUB_WORKSPACE/out/bodyFile.md
+          fi
+          rm $GITHUB_WORKSPACE/out/artifacts/*bodyFile*
           
       - name: Release
         id: release
