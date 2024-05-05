@@ -5,7 +5,7 @@ on:
     inputs:
       include_ksu:
         required: true
-        type: boolean
+        type: string
       os:
         required: false
         type: string
@@ -18,11 +18,5 @@ jobs:
       - name: Build
         id: build
         run: |
-          cd $GITHUB_WORKSPACE
-          if [[ ${{ inputs.include_ksu }} == true ]]; then
-            echo "option: KSU"
-            sudo bash main.sh | -s "KSU"
-          elif
-            echo "option: NonKSU"
-            sudo bash main.sh | -s "NonKSU"
-          fi
+            echo "Building ${{ inputs.include_ksu }}"
+            sudo bash main.sh | -s ${{ inputs.include_ksu }}
