@@ -156,13 +156,16 @@ cp $IMAGE .
 cp $DTB $WORKDIR/Anykernel3/dtb
 cp $DTBO .
 
-# Archive
+# Prepare Archive
 if [[ $KSU_ENABLED == "true" ]]; then
   ZIP_NAME="$KERNEL_NAME-KSU.zip"
+  echo "$TITLE" > name-KSU.txt
 else
   ZIP_NAME="$KERNEL_NAME.zip"
+  echo "$TITLE" > name.txt
 fi
 
+# Archive
 TIME=$(TZ='Europe/Berlin' date +"%Y-%m-%d %H:%M:%S")
 find ./ * -exec touch -m -d "$TIME" {} \;
 zip -r9 $ZIP_NAME *
@@ -189,7 +192,6 @@ echo "
 - **[CLANG]($CLANG_SOURCE) Version**: $CLANG_VERSION
 - **LLD Version**: $LLD_VERSION
 " > bodyFile.md
-echo "$TITLE" > name.txt
 
 # Finish
 msg "Done"
