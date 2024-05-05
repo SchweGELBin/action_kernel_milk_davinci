@@ -96,7 +96,9 @@ jobs:
           else
             echo "name=$(cat "$GITHUB_WORKSPACE/out/name.txt")" >> $GITHUB_ENV
           fi
-          cp ./KernelSU*.apk ./out/artifacts/Manager.apk
+          if [[ -f ./KernelSU*.apk ]]; then
+            cp ./KernelSU*.apk ./out/artifacts/Manager.apk
+          fi
           
       - name: Release
         id: release
