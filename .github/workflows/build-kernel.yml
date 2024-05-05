@@ -31,10 +31,10 @@ jobs:
         run: |
             echo "Building ${{ inputs.include_ksu }}"
             sudo bash main.sh ${{ inputs.include_ksu }} ${{ inputs.kernel_git }} ${{ inputs.kernel_branch }}
-      - name: Prepqre Upload
+      - name: Prepare Upload
         id: prepare
         run: |
-          echo "zip_name=$(ls "$GITHUB_WORKSPACE/out/artifacts/*.zip")" >> $GITHUB_ENV
+          echo "zip_name=$(ls "./out/artifacts/*.zip")" >> $GITHUB_ENV
       - name: Upload Kernel
         uses: actions/upload-artifact@v4
         with:
