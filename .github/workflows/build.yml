@@ -13,11 +13,11 @@ on:
         required: true
         type: boolean
       Kernel_Git:
-        required: false
+        required: true
         type: string
         default: https://github.com/SchweGELBin/kernel_milk_davinci.git
       Kernel_Branch:
-        required: false
+        required: true
         type: string
         default: pixelos-14.0
       os:
@@ -48,12 +48,16 @@ jobs:
     uses: ./.github/workflows/build-kernel.yml
     with:
       include_ksu: true
+      kernel_git: ${{ inputs.Kernel_Git }}
+      kernel_branch: ${{ inputs.Kernel_Branch }}
 
   build-nonksu:
     needs: env
     uses: ./.github/workflows/build-kernel.yml
     with:
       include_ksu: false
+      kernel_git: ${{ inputs.Kernel_Git }}
+      kernel_branch: ${{ inputs.Kernel_Branch }}
       
   build:
     needs: [env, build-manager, build-ksu, build-nonksu]
