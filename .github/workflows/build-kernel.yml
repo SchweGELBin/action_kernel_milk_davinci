@@ -1,0 +1,28 @@
+name: Build Kernel
+
+on:
+  workflow_call:
+    inputs:
+      include_ksu:
+        required: true
+        type: boolean
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
+
+jobs:
+  build:
+    runs-on: ${{ inputs.os }}
+    steps:
+      - name: Build
+        id: build
+        run: |
+          cd $GITHUB_WORKSPACE
+          if [[ ${{ inputs.os }} == true ]]; then
+            echo "option: KSU"
+            sudo bash main.sh | -s "KSU"
+          elif
+            echo "option: NonKSU"
+            sudo bash main.sh | -s "NonKSU"
+          fi
