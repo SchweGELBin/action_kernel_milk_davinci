@@ -21,16 +21,16 @@ jobs:
   env:
     runs-on: ${{ inputs.os }}
     steps:
-      - name: Environment
-        id: environment
-        run: |
-          cd $GITHUB_WORKSPACE
-          sudo bash env.sh
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Environment
+        id: environment
+        run: |
+          cd $GITHUB_WORKSPACE
+          sudo bash env.sh
 
   build-manager:
     uses: ./.github/workflows/build-manager.yml
