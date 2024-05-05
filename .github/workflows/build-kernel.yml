@@ -12,7 +12,7 @@ on:
         default: ubuntu-latest
 
 jobs:
-  build:
+  build-kernel:
     runs-on: ${{ inputs.os }}
     steps:
       - name: Build
