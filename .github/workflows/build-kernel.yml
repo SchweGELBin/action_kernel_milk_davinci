@@ -34,6 +34,8 @@ jobs:
       - name: Prepare Upload
         id: prepare
         run: |
+          cd $GITHUB_WORKSPACE
+          echo "$(ls -R)" # Debug info
           echo "zip_name=$(ls "./out/artifacts/*.zip")" >> $GITHUB_ENV
       - name: Upload Kernel
         uses: actions/upload-artifact@v4
