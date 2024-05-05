@@ -106,7 +106,7 @@ if [[ $KSU_ENABLED == "true" ]]; then
     msg "KernelSU Version: $KERNELSU_VERSION"
 
     if [[ $REMOVE_SIG_VER == "true" ]]; then
-        # Signature Verification method changed
+        echo "Signature Verification method changed"
     fi
 
     TITLE=$TITLE-$KERNELSU_VERSION
