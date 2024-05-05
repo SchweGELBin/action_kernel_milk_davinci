@@ -34,14 +34,14 @@ jobs:
       - name: Prepqre Upload
         id: prepare
         run: |
-          echo "name=$(cat "$GITHUB_WORKSPACE/out/name*")" >> $GITHUB_ENV
+          echo "zip_name=$(ls "$GITHUB_WORKSPACE/out/artifacts/*.zip")" >> $GITHUB_ENV
       - name: Upload Kernel
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.name }}
+          name: ${{ env.zip_name }}
           path: out/artifacts/*.zip
       - name: Upload bodyFile
         uses: actions/upload-artifact@v4
         with:
-          name: bodyFile-${{ env.name }}
+          name: ${{ env.zip_name }}-bodyFile.md
           path: out/bodyFile.md
