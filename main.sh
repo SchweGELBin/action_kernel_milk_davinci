@@ -190,7 +190,6 @@ echo "
 - **LLD Version**: $LLD_VERSION
 " > bodyFile.md
 echo "$TITLE" > name.txt
-echo "$KERNEL_NAME.zip" > filename.txt
 
 # Finish
 msg "Done"
