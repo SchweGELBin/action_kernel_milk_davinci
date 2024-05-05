@@ -1,6 +1,12 @@
 name: Build Manager
 
-on: [workflow_call]
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: ubuntu-latest
 
 jobs:
   build-ksud:
@@ -8,19 +14,17 @@ jobs:
       matrix:
         include:
           - target: aarch64-linux-android
-            os: ubuntu-latest
           - target: x86_64-linux-android
-            os: ubuntu-latest
     uses: ./.github/workflows/ksud.yml
     with:
       target: ${{ matrix.target }}
-      os: ${{ matrix.os }}
+      os: ubuntu-latest
       pack_lkm: false
       use_cache: false
 
   build-manager:
     needs: build-ksud
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.os }}
     defaults:
       run:
         working-directory: ./manager
