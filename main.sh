@@ -11,7 +11,7 @@ KERNEL_BRANCH="pixelos-14.0"
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
 REMOVE_SIG_VER="false"
-KSU_ENABLED="true"
+KSU_ENABLED="false"
 
 # Anykernel3
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
