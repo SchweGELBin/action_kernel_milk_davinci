@@ -6,6 +6,12 @@ on:
       include_ksu:
         required: true
         type: string
+      kernel_git:
+        required: true
+        type: string
+      kernel_branch:
+        required: true
+        type: string
       os:
         required: false
         type: string
@@ -24,4 +30,4 @@ jobs:
         id: build
         run: |
             echo "Building ${{ inputs.include_ksu }}"
-            sudo bash main.sh ${{ inputs.include_ksu }}
+            sudo bash main.sh ${{ inputs.include_ksu }} ${{ inputs.kernel_git }} ${{ inputs.kernel_branch }}
