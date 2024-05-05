@@ -15,6 +15,11 @@ jobs:
   build-kernel:
     runs-on: ${{ inputs.os }}
     steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Build
         id: build
         run: |
