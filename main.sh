@@ -87,13 +87,22 @@ TITLE=$KERNEL_NAME-$KERNEL_VERSION
 
 cd $KERNEL_DIR
 
-msg "KernelSU"
+# Input Variables
 if [[ $1 == "KSU" ]]; then
     KSU_ENABLED="true"
 elif [[ $1 == "NonKSU" ]]; then
     KSU_ENABLED="false"
 fi
 
+if [[ $2 == *.git ]]; then
+    KERNEL_GIT=$2
+fi
+
+if [[ $3 ]]; then
+    KERNEL_BRANCH=$3
+fi
+
+msg "KernelSU"
 if [[ $KSU_ENABLED == "true" ]]; then
     curl -LSs "https://raw.githubusercontent.com/$KERNELSU_REPO/main/kernel/setup.sh" | bash -s main
 
