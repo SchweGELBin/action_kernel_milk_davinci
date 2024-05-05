@@ -19,7 +19,7 @@ jobs:
         id: build
         run: |
           cd $GITHUB_WORKSPACE
-          if [[ ${{ inputs.os }} == true ]]; then
+          if [[ ${{ inputs.include_ksu }} == true ]]; then
             echo "option: KSU"
             sudo bash main.sh | -s "KSU"
           elif
