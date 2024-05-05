@@ -19,4 +19,4 @@ jobs:
         id: build
         run: |
             echo "Building ${{ inputs.include_ksu }}"
-            sudo bash main.sh | -s ${{ inputs.include_ksu }}
+            sudo bash main.sh ${{ inputs.include_ksu }}
