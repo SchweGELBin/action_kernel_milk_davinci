@@ -102,6 +102,7 @@ jobs:
           fi
           rm out/artifacts/*-bodyFile.md
           rm out/artifacts/*-name.txt
+          rm out/artifacts/ksud*
           
       - name: Release
         id: release
