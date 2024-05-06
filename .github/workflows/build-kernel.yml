@@ -35,14 +35,20 @@ jobs:
         id: prepare
         run: |
           cd $GITHUB_WORKSPACE/out/artifacts
-          echo "zip_name=$(ls *.zip)" >> $GITHUB_ENV
+          zip_name="$(ls *.zip)"
+          echo "kernel_name=${zip_name::-4}" >> $GITHUB_ENV
       - name: Upload Kernel
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.zip_name }}
+          name: ${{ env.kernel_name }}.zip
           path: out/artifacts/*.zip
       - name: Upload bodyFile
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.zip_name }}-bodyFile.md
+          name: ${{ env.kernel_name }}-bodyFile.md
           path: out/bodyFile.md
+      - name: Upload Name
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.kernel_name }}-name.txt
+          path: out/name.txt
