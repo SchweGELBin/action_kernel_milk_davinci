@@ -83,7 +83,7 @@ jobs:
         id: artifacts
         uses: actions/download-artifact@v4
         with:
-          path: artifacts/.
+          path: out/artifacts/.
           
       - name: Prepare Release
         id: prepare
