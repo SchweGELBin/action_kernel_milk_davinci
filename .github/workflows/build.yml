@@ -83,24 +83,22 @@ jobs:
         id: artifacts
         uses: actions/download-artifact@v4
         with:
-          merge-multiple: true
-          path: out/artifacts/.
+          merge-multiple: false
+          path: out/download/.
           
       - name: Prepare Release
         id: prepare
         run: |
           cd $GITHUB_WORKSPACE
-          if [[ -f out/artifacts/*-KSU-bodyFile.md ]]; then
-            cp "out/artifacts/*-KSU-bodyFile.md" out/bodyFile.md
+          if [[ -d out/download/*-KSU ]]; then
+            cp out/download/*-KSU/bodyFile.md out/bodyFile.md
+            echo "name=$(cat out/download/*-KSU/name.txt)" >> $GITHUB_ENV
           else
-            cp "out/artifacts/*-bodyFile.md" out/bodyFile.md
+            cp out/download/*-NonKSU/bodyFile.md out/bodyFile.md
+            echo "name=$(cat out/download/*-NonKSU/name.txt)" >> $GITHUB_ENV
           fi
-          if [[ -f out/artifacts/*-KSU-name.txt ]]; then
-            echo "name=$(cat out/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
-          else
-            echo "name=$(cat out/artifacts/*-name.txt)" >> $GITHUB_ENV
-          fi
-          rm "out/artifacts/*-bodyFile.md" "out/artifacts/*-name.txt" "out/artifacts/ksud*"
+          cp out/download/manager/*.apk out/artifacts/Manager.apk
+          cp out/download/*KSU/*.zip out/artifacts/
           
       - name: Release
         id: release
