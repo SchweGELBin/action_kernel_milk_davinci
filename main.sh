@@ -174,7 +174,7 @@ mkdir -p $WORKDIR/out
 if [[ $KSU_ENABLED == "true" ]]; then
   ZIP_NAME="$KERNEL_NAME-KSU.zip"
 else
-  ZIP_NAME="$KERNEL_NAME.zip"
+  ZIP_NAME="$KERNEL_NAME-NonKSU.zip"
 fi
 TIME=$(TZ='Europe/Berlin' date +"%Y-%m-%d %H:%M:%S")
 find ./ * -exec touch -m -d "$TIME" {} \;
