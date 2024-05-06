@@ -99,6 +99,8 @@ jobs:
           fi
           cp out/download/manager/*.apk out/artifacts/Manager.apk
           cp out/download/*KSU/*.zip out/artifacts/
+          echo "Current structure in out:"
+          echo "$(ls -R out)"
           
       - name: Release
         id: release
