@@ -170,6 +170,7 @@ cp $DTB $WORKDIR/Anykernel3/dtb
 cp $DTBO .
 
 # Archive
+mkdir -p $WORKDIR/out
 if [[ $KSU_ENABLED == "true" ]]; then
   ZIP_NAME="$KERNEL_NAME-KSU.zip"
 else
