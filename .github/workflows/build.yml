@@ -90,18 +90,16 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           if [[ -f out/artifacts/*-KSU-bodyFile.md ]]; then
-            cp out/artifacts/*-KSU-bodyFile.md out/bodyFile.md
+            cp "out/artifacts/*-KSU-bodyFile.md" out/bodyFile.md
           else
-            cp out/artifacts/*-bodyFile.md out/bodyFile.md
+            cp "out/artifacts/*-bodyFile.md" out/bodyFile.md
           fi
           if [[ -f out/artifacts/*-KSU-name.txt ]]; then
             echo "name=$(cat out/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
           else
             echo "name=$(cat out/artifacts/*-name.txt)" >> $GITHUB_ENV
           fi
-          rm out/artifacts/*-bodyFile.md
-          rm out/artifacts/*-name.txt
-          rm out/artifacts/ksud*
+          rm "out/artifacts/*-bodyFile.md" "out/artifacts/*-name.txt" "out/artifacts/ksud*"
           
       - name: Release
         id: release
