@@ -96,10 +96,10 @@ jobs:
           fi
           mv out/artifacts/*-bodyFile.md out/bodyFile.md
           if [[ -f out/artifacts/*-KSU-name.txt ]]; then
-            echo "cat (out/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
+            echo "$(cat out/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
             rm out/artifacts/*-KSU-name.txt
           else
-            echo "cat (out/artifacts/*-name.txt)" >> $GITHUB_ENV
+            echo "$(cat out/artifacts/*-name.txt)" >> $GITHUB_ENV
           fi
           rm out/artifacts/*-name.txt
           
