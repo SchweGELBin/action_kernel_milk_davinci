@@ -95,9 +95,9 @@ jobs:
             cp out/artifacts/*-bodyFile.md out/bodyFile.md
           fi
           if [[ -f out/artifacts/*-KSU-name.txt ]]; then
-            echo "name=$(cat $opath/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
+            echo "name=$(cat out/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
           else
-            echo "name=$(cat $opath/artifacts/*-name.txt)" >> $GITHUB_ENV
+            echo "name=$(cat out/artifacts/*-name.txt)" >> $GITHUB_ENV
           fi
           rm out/artifacts/*-bodyFile.md
           rm out/artifacts/*-name.txt
