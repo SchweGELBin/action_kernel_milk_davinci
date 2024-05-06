@@ -91,16 +91,16 @@ jobs:
           cd $GITHUB_WORKSPACE
           sudo chmod -R 0777 ./*
           if [[ -f out/artifacts/*-KSU-bodyFile.md ]]; then
-            mv out/artifacts/*-KSU-bodyFile.md out/bodyFile.md
-            rm out/artifacts/*-bodyFile.md
+            cp out/artifacts/*-KSU-bodyFile.md out/bodyFile.md
+          else
+            cp out/artifacts/*-bodyFile.md out/bodyFile.md
           fi
-          mv out/artifacts/*-bodyFile.md out/bodyFile.md
           if [[ -f out/artifacts/*-KSU-name.txt ]]; then
             echo "name=$(cat out/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
-            rm out/artifacts/*-KSU-name.txt
           else
             echo "name=$(cat out/artifacts/*-name.txt)" >> $GITHUB_ENV
           fi
+          rm out/artifacts/*-bodyFile.md
           rm out/artifacts/*-name.txt
           
       - name: Release
