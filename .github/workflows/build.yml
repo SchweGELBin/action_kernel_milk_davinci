@@ -49,7 +49,7 @@ jobs:
     needs: env
     uses: ./.github/workflows/build-kernel.yml
     with:
-      include_ksu: true
+      include_ksu: "KSU"
       kernel_git: ${{ inputs.Kernel_Git }}
       kernel_branch: ${{ inputs.Kernel_Branch }}
 
@@ -58,7 +58,7 @@ jobs:
     needs: env
     uses: ./.github/workflows/build-kernel.yml
     with:
-      include_ksu: false
+      include_ksu: "NonKSU"
       kernel_git: ${{ inputs.Kernel_Git }}
       kernel_branch: ${{ inputs.Kernel_Branch }}
       
