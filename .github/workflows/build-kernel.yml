@@ -40,5 +40,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.kernel_name }}-${{ inputs.include_ksu }}
+          name: ${{ env.kernel_name }}
           path: out/*
