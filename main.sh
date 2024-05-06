@@ -170,16 +170,18 @@ cp $DTB $WORKDIR/Anykernel3/dtb
 cp $DTBO .
 
 # Archive
-ZIP_NAME="$KERNEL_NAME.zip"
+if [[ $KSU_ENABLED == "true" ]]; then
+  ZIP_NAME="$KERNEL_NAME-KSU.zip"
+else
+  ZIP_NAME="$KERNEL_NAME.zip"
+fi
 TIME=$(TZ='Europe/Berlin' date +"%Y-%m-%d %H:%M:%S")
 find ./ * -exec touch -m -d "$TIME" {} \;
 zip -r9 $ZIP_NAME *
-mkdir -p $WORKDIR/out
 cp *.zip $WORKDIR/out
 
-cd $WORKDIR/out
-
 # Release Files
+cd $WORKDIR/out
 msg "Release Files"
 echo "
 ## [$KERNEL_NAME]($README)
