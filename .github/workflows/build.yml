@@ -89,20 +89,21 @@ jobs:
         id: prepare
         run: |
           cd $GITHUB_WORKSPACE
-          sudo chmod -R 0777 ./*
-          if [[ -f out/artifacts/*-KSU-bodyFile.md ]]; then
-            cp out/artifacts/*-KSU-bodyFile.md out/bodyFile.md
+          opath="$GITHUB_WORKSPACE/out"
+          apath="$opath/artifacts"
+          if [[ -f $apath/*-KSU-bodyFile.md ]]; then
+            cp $apath/*-KSU-bodyFile.md $opath/bodyFile.md
           else
-            cp out/artifacts/*-bodyFile.md out/bodyFile.md
+            cp $apath/*-bodyFile.md $opath/bodyFile.md
           fi
-          if [[ -f out/artifacts/*-KSU-name.txt ]]; then
-            echo "name=$(cat out/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
+          if [[ -f $apath/*-KSU-name.txt ]]; then
+            echo "name=$(cat $opath/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
           else
-            echo "name=$(cat out/artifacts/*-name.txt)" >> $GITHUB_ENV
+            echo "name=$(cat $opath/artifacts/*-name.txt)" >> $GITHUB_ENV
           fi
-          rm out/artifacts/*-bodyFile.md
-          rm out/artifacts/*-name.txt
-          rm out/artifacts/ksud*
+          rm $apath/*-bodyFile.md
+          rm $apath/*-name.txt
+          rm $apath/ksud*
           
       - name: Release
         id: release
