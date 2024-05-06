@@ -52,5 +52,3 @@ jobs:
         with:
           name: ${{ env.kernel_name }}-name.txt
           path: out/name.txt
-      - name: Cleanup
-        run: rm -r out/*
