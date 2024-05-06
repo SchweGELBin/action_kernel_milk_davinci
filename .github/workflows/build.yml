@@ -90,6 +90,7 @@ jobs:
         id: prepare
         run: |
           cd $GITHUB_WORKSPACE
+          mkdir -p out/artifacts
           if [[ -d out/download/*-KSU ]]; then
             cp out/download/*-KSU/bodyFile.md out/bodyFile.md
             echo "name=$(cat out/download/*-KSU/name.txt)" >> $GITHUB_ENV
