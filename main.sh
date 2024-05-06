@@ -173,10 +173,8 @@ cp $DTBO .
 cd $WORKDIR/out
 if [[ $KSU_ENABLED == "true" ]]; then
   ZIP_NAME="$KERNEL_NAME-KSU.zip"
-  echo "$TITLE" > name-KSU.txt
 else
   ZIP_NAME="$KERNEL_NAME.zip"
-  echo "$TITLE" > name.txt
 fi
 
 # Archive
@@ -206,6 +204,7 @@ echo "
 - **[CLANG]($CLANG_SOURCE) Version**: $CLANG_VERSION
 - **LLD Version**: $LLD_VERSION
 " > bodyFile.md
+echo "$TITLE" > name.txt
 
 # Finish
 msg "Done"
