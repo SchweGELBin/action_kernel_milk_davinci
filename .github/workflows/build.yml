@@ -83,6 +83,7 @@ jobs:
         id: artifacts
         uses: actions/download-artifact@v4
         with:
+          merge-multiple: true
           path: out/artifacts/.
           
       - name: Prepare Release
