@@ -89,21 +89,19 @@ jobs:
         id: prepare
         run: |
           cd $GITHUB_WORKSPACE
-          opath="$GITHUB_WORKSPACE/out"
-          apath="$opath/artifacts"
-          if [[ -f $apath/*-KSU-bodyFile.md ]]; then
-            cp $apath/*-KSU-bodyFile.md $opath/bodyFile.md
+          if [[ -f out/artifacts/*-KSU-bodyFile.md ]]; then
+            cp out/artifacts/*-KSU-bodyFile.md out/bodyFile.md
           else
-            cp $apath/*-bodyFile.md $opath/bodyFile.md
+            cp out/artifacts/*-bodyFile.md out/bodyFile.md
           fi
-          if [[ -f $apath/*-KSU-name.txt ]]; then
+          if [[ -f out/artifacts/*-KSU-name.txt ]]; then
             echo "name=$(cat $opath/artifacts/*-KSU-name.txt)" >> $GITHUB_ENV
           else
             echo "name=$(cat $opath/artifacts/*-name.txt)" >> $GITHUB_ENV
           fi
-          rm $apath/*-bodyFile.md
-          rm $apath/*-name.txt
-          rm $apath/ksud*
+          rm out/artifacts/*-bodyFile.md
+          rm out/artifacts/*-name.txt
+          rm out/artifacts/ksud*
           
       - name: Release
         id: release
@@ -118,4 +116,4 @@ jobs:
           
       - name: Cleanup
         id: cleanup
-        run: rm -r ${{ github.workspace }}/out/*
+        run: rm -r $GITHUB_WORKSPACE/out/*
