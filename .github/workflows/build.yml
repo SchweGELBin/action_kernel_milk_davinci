@@ -88,7 +88,13 @@ jobs:
       - name: Prepare Release
         id: prepare
         run: |
+          echo "List files in root:"
+          echo "$(ls)"
           cd $GITHUB_WORKSPACE
+          echo "List files in Workspace:"
+          echo "$(ls)"
+          echo "List files in out:"
+          echo "$(ls -R)"
           if [[ -f out/artifacts/*-KSU-bodyFile.md ]]; then
             cp "out/artifacts/*-KSU-bodyFile.md" out/bodyFile.md
           else
