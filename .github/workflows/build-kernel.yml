@@ -4,13 +4,16 @@ on:
   workflow_call:
     inputs:
       include_ksu:
-        required: true
+        required: false
         type: string
       kernel_git:
-        required: true
+        required: false
         type: string
       kernel_branch:
-        required: true
+        required: false
+        type: string
+      device_defconfig:
+        required: false
         type: string
       os:
         required: false
@@ -30,7 +33,7 @@ jobs:
         id: build
         run: |
             echo "Building ${{ inputs.include_ksu }}"
-            sudo bash main.sh ${{ inputs.include_ksu }} ${{ inputs.kernel_git }} ${{ inputs.kernel_branch }}
+            sudo bash main.sh ${{ inputs.include_ksu }} ${{ inputs.kernel_git }} ${{ inputs.kernel_branch }} ${{ inputs.device_defconfig }}
       - name: Prepare Upload
         id: prepare
         run: |
