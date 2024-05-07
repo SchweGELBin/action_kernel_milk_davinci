@@ -10,7 +10,6 @@ KERNEL_BRANCH="pixelos-14.0"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
-REMOVE_SIG_VER="false"
 KSU_ENABLED="false"
 
 # Anykernel3
@@ -117,10 +116,6 @@ if [[ $KSU_ENABLED == "true" ]]; then
     KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
     KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10200))
     msg "KernelSU Version: $KERNELSU_VERSION"
-
-    if [[ $REMOVE_SIG_VER == "true" ]]; then
-        echo "Signature Verification method changed"
-    fi
 
     TITLE=$TITLE-$KERNELSU_VERSION
     sed -i "s/^CONFIG_LOCALVERSION=.*/CONFIG_LOCALVERSION=\"-$KERNELSU_VERSION-$KERNEL_NAME\"/" $DEVICE_DEFCONFIG_FILE
