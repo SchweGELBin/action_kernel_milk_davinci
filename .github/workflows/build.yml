@@ -93,7 +93,7 @@ jobs:
           mkdir -p out/artifacts
           echo "Current structure in out:"
           echo "$(ls -R out)"
-          if [[ -d out/download/*-KSU ]]; then
+          if [[ -z $(ls out/download| grep "\-KSU") ]]; then
             cp out/download/*-KSU/bodyFile.md out/bodyFile.md
             echo "name=$(cat out/download/*-KSU/name.txt)" >> $GITHUB_ENV
           else
