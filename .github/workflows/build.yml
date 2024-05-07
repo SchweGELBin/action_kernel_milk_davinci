@@ -6,12 +6,15 @@ on:
       Build_KSU:
         required: true
         type: boolean
+        default: true
       Build_NonKSU:
         required: true
         type: boolean
+        default: true
       Build_Manager:
         required: true
         type: boolean
+        default: false
       Kernel_Git:
         required: true
         type: string
@@ -19,9 +22,9 @@ on:
       Kernel_Branch:
         required: true
         type: string
-        default: pixelos-14.0
+        default: vantom-14
       os:
-        required: false
+        required: true
         type: string
         default: ubuntu-latest
 
@@ -43,6 +46,8 @@ jobs:
   build-manager:
     if: ${{ inputs.Build_Manager }}
     uses: ./.github/workflows/build-manager.yml
+    with:
+      os: ${{ inputs.os }}
     
   build-ksu:
     if: ${{ inputs.Build_KSU }}
@@ -52,6 +57,7 @@ jobs:
       include_ksu: "KSU"
       kernel_git: ${{ inputs.Kernel_Git }}
       kernel_branch: ${{ inputs.Kernel_Branch }}
+      os: ${{ inputs.os }}
 
   build-nonksu:
     if: ${{ inputs.Build_NonKSU }}
@@ -61,6 +67,7 @@ jobs:
       include_ksu: "NonKSU"
       kernel_git: ${{ inputs.Kernel_Git }}
       kernel_branch: ${{ inputs.Kernel_Branch }}
+      os: ${{ inputs.os }}
       
   build:
     needs: [env, build-manager, build-ksu, build-nonksu]
