@@ -64,6 +64,10 @@ jobs:
       
   build:
     needs: [env, build-manager, build-ksu, build-nonksu]
+    if: |
+      always() &&
+      !failure() &&
+      !cancelled()
     runs-on: ${{ inputs.os }}
     steps:
       - name: Checkout
