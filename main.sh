@@ -26,6 +26,30 @@ CLANG_REPO="ZyCromerZ/Clang"
 
 # ------------------------------------------------------------
 
+# Input Variables
+if [[ $1 == "KSU" ]]; then
+    KSU_ENABLED="true"
+    echo "Input changed KSU_ENABLED to true"
+elif [[ $1 == "NonKSU" ]]; then
+    KSU_ENABLED="false"
+    echo "Input changed KSU_ENABLED to false"
+fi
+
+if [[ $2 == *.git ]]; then
+    KERNEL_GIT=$2
+    echo "Input changed KERNEL_GIT to $2"
+fi
+
+if [[ $3 ]]; then
+    KERNEL_BRANCH=$3
+    echo "Input changed KERNEL_BRANCH to $3"
+fi
+
+if [[ $4 ]]; then
+    DEVICE_DEFCONFIG=$4
+    echo "Input changed DEVICE_DEFCONFIG to $4"
+fi
+
 # Set variables
 WORKDIR="$(pwd)"
 
@@ -85,25 +109,6 @@ msg "Kernel Version: $KERNEL_VERSION"
 TITLE=$KERNEL_NAME-$KERNEL_VERSION
 
 cd $KERNEL_DIR
-
-# Input Variables
-if [[ $1 == "KSU" ]]; then
-    KSU_ENABLED="true"
-    echo "Input changed KSU_ENABLED to true"
-elif [[ $1 == "NonKSU" ]]; then
-    KSU_ENABLED="false"
-    echo "Input changed KSU_ENABLED to false"
-fi
-
-if [[ $2 == *.git ]]; then
-    KERNEL_GIT=$2
-    echo "Input changed KERNEL_GIT to $2"
-fi
-
-if [[ $3 ]]; then
-    KERNEL_BRANCH=$3
-    echo "Input changed KERNEL_BRANCH to $3"
-fi
 
 msg "KernelSU"
 if [[ $KSU_ENABLED == "true" ]]; then
