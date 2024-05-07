@@ -13,7 +13,8 @@ Please read following **[README](https://github.com/SchweGELBin/kernel_milk_davi
 - Then edit the ```Changable Data``` section at the beginning of main.sh
 - Make sure to use this format: e.g. ```KERNEL_NAME="MilkKernel"```
 - Run Action "CI Build"
-- Your kernel and the Manager will be available at "releases" in your repository
+- You can choose your build options before you start (These will override the variables in main.sh)
+- The files will be available at "releases" in your repository
 
 ```
 # Kernel
@@ -24,7 +25,6 @@ ANDROID_VERSION   | Your preferred Android version of your kernel
 
 # KernelSU
 KERNELSU_REPO     | KernelSU repo (Owner/reponame) default: "tiann/KernelSU"
-REMOVE_SIG_VER    | Use at your own risk: Removes the signature verification to allow any build of the KernelSU Manager
 KSU_ENABLED       | KernelSU enabled ("true") or disabled ("false")
 
 # Anykernel3
