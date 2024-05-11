@@ -23,10 +23,10 @@ on:
         required: true
         type: string
         default: vantom-14
-      Device_Defconfig:
+      Kernel_Type:
         required: true
         type: string
-        default: davinci_defconfig
+        default: vantom
       os:
         required: true
         type: string
@@ -61,7 +61,7 @@ jobs:
       include_ksu: "KSU"
       kernel_git: ${{ inputs.Kernel_Git }}
       kernel_branch: ${{ inputs.Kernel_Branch }}
-      device_defconfig: ${{ inputs.Device_Defconfig }}
+      kernel_type: ${{ inputs.Kernel_Type }}
       os: ${{ inputs.os }}
 
   build-nonksu:
@@ -72,7 +72,7 @@ jobs:
       include_ksu: "NonKSU"
       kernel_git: ${{ inputs.Kernel_Git }}
       kernel_branch: ${{ inputs.Kernel_Branch }}
-      device_defconfig: ${{ inputs.Device_Defconfig }}
+      kernel_type: ${{ inputs.Kernel_Type }}
       os: ${{ inputs.os }}
       
   build:
