@@ -19,6 +19,7 @@ ANYKERNEL3_BRANCH="master"
 # Build
 DEVICE_CODE="davinci"
 DEVICE_DEFCONFIG="davinci_defconfig"
+COMMON_DEFCONFIG=""
 DEVICE_ARCH="arch/arm64"
 
 # Clang
@@ -29,26 +30,32 @@ CLANG_REPO="ZyCromerZ/Clang"
 # Input Variables
 if [[ $1 == "KSU" ]]; then
     KSU_ENABLED="true"
-    echo "Input changed KSU_ENABLED to true"
 elif [[ $1 == "NonKSU" ]]; then
     KSU_ENABLED="false"
-    echo "Input changed KSU_ENABLED to false"
 fi
 
 if [[ $2 == *.git ]]; then
     KERNEL_GIT=$2
-    echo "Input changed KERNEL_GIT to $2"
 fi
 
 if [[ $3 ]]; then
     KERNEL_BRANCH=$3
-    echo "Input changed KERNEL_BRANCH to $3"
 fi
 
-if [[ $4 ]]; then
-    DEVICE_DEFCONFIG=$4
-    echo "Input changed DEVICE_DEFCONFIG to $4"
+if [[ $4 == "vantom" ]]; then
+    DEVICE_DEFCONFIG="davinci_defconfig"
+    COMMON_DEFCONFIG=""
+else if [[ $4 == "perf" ]]; then
+    DEVICE_DEFCONFIG="vendor/davinci.config"
+    COMMON_DEFCONFIG="vendor/sdmsteppe-perf_defconfig"
 fi
+
+msg "Variables"
+echo "KSU_ENABLED: $KSU_ENABLED"
+echo "KERNEL_GIT: $KERNEL_GIT"
+echo "KERNEL_BRANCH: $KERNEL_BRANCH"
+echo "DEVICE_DEFCONFIG: $DEVICE_DEFCONFIG"
+echo "COMMON_DEFCONFIG: $COMMON_DEFCONFIG"
 
 # Set variables
 WORKDIR="$(pwd)"
@@ -157,6 +164,11 @@ LLVM=1 \
 LLVM_IAS=1"
 
 rm -rf out
+
+if [[ -z $COMMON_DEFCONFIG ]]; then
+    make O=out $args $COMMON_DEFCONFIG
+fi
+
 make O=out $args $DEVICE_DEFCONFIG
 make O=out $args kernelversion
 make O=out $args -j"$(nproc --all)"
