@@ -45,7 +45,7 @@ fi
 if [[ $4 == "vantom" ]]; then
     DEVICE_DEFCONFIG="davinci_defconfig"
     COMMON_DEFCONFIG=""
-else if [[ $4 == "perf" ]]; then
+elif [[ $4 == "perf" ]]; then
     DEVICE_DEFCONFIG="vendor/davinci.config"
     COMMON_DEFCONFIG="vendor/sdmsteppe-perf_defconfig"
 fi
