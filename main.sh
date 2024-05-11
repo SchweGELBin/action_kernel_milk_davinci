@@ -27,6 +27,13 @@ CLANG_REPO="ZyCromerZ/Clang"
 
 # ------------------------------------------------------------
 
+# Highlight
+msg() {
+	echo
+	echo -e "\e[1;33m$*\e[0m"
+	echo
+}
+
 # Input Variables
 if [[ $1 == "KSU" ]]; then
     KSU_ENABLED="true"
@@ -81,13 +88,6 @@ DTBO="$KERNEL_DIR/out/$DEVICE_ARCH/boot/dtbo.img"
 
 export KBUILD_BUILD_USER=SchweGELBin
 export KBUILD_BUILD_HOST=GitHubCI
-
-# Highlight
-msg() {
-	echo
-	echo -e "\e[1;33m$*\e[0m"
-	echo
-}
 
 cd $WORKDIR
 
