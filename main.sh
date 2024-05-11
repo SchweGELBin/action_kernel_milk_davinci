@@ -77,7 +77,7 @@ IMAGE="$KERNEL_DIR/out/$DEVICE_ARCH/boot/Image.gz"
 DTB="$KERNEL_DIR/out/$DEVICE_ARCH/boot/dtb.img"
 DTBO="$KERNEL_DIR/out/$DEVICE_ARCH/boot/dtbo.img"
 
-DEVICE_DEFCONFIG="$(echo "$DEVICE_DEFCONFIG" | rev | cut -d"/" -f1 | rev)"
+#DEVICE_DEFCONFIG="$(echo "$DEVICE_DEFCONFIG" | rev | cut -d"/" -f1 | rev)"
 
 export KBUILD_BUILD_USER=SchweGELBin
 export KBUILD_BUILD_HOST=GitHubCI
