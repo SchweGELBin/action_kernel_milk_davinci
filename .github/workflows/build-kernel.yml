@@ -29,11 +29,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Environment
+        id: env
+        run: |
+            echo "Setting up the environment}"
+            sudo bash env.sh
       - name: Build
         id: build
         run: |
             echo "Building ${{ inputs.include_ksu }}"
-            sudo bash env.sh
             sudo bash main.sh ${{ inputs.include_ksu }} ${{ inputs.kernel_git }} ${{ inputs.kernel_branch }} ${{ inputs.kernel_type }}
       - name: Prepare Upload
         id: prepare
