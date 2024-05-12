@@ -39,23 +39,12 @@ jobs:
         run: |
             echo "Building ${{ inputs.include_ksu }}"
             sudo bash main.sh ${{ inputs.include_ksu }} ${{ inputs.kernel_git }} ${{ inputs.kernel_branch }} ${{ inputs.kernel_type }}
-      - name: Get Tag
-        id: tag
-        run: |
-          latest_tag=$(curl -s https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest | grep "tag_name" | cut -d '"' -f 4)
-          if [[ -z "$latest_tag" ]]; then latest_tag='v0'; fi
-          echo "Latest Tag: $latest_tag"
-          echo "tag=v$((${latest_tag:1} + 1))" >> $GITHUB_ENV
       - name: Prepare Upload
         id: prepare
         run: |
           cd $GITHUB_WORKSPACE/out
           zip_name="$(ls *.zip)"
           echo "kernel_name=${zip_name::-4}" >> $GITHUB_ENV
-          if [[ ! $(ls name.txt) ]]; then
-              touch name.txt
-              echo "${{ env.kernel_name }}-${{ env.tag }}" > name.txt
-          fi
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
