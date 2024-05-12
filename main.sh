@@ -59,6 +59,9 @@ if [[ $KERNEL_TYPE == "vantom" ]]; then
 elif [[ $KERNEL_TYPE == "perf" ]]; then
     DEVICE_DEFCONFIG="vendor/davinci.config"
     COMMON_DEFCONFIG="vendor/sdmsteppe-perf_defconfig"
+else
+    DEVICE_DEFCONFIG="davinci_defconfig"
+    COMMON_DEFCONFIG=""
 fi
 
 msg "Variables"
