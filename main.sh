@@ -7,6 +7,7 @@
 KERNEL_NAME="MilkKernel"
 KERNEL_GIT="https://github.com/SchweGELBin/kernel_milk_davinci.git"
 KERNEL_BRANCH="vantom-14"
+KERNEL_TYPE="vantom"
 
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
@@ -19,7 +20,6 @@ ANYKERNEL3_BRANCH="master"
 # Build
 DEVICE_CODE="davinci"
 DEVICE_ARCH="arch/arm64"
-KERNEL_TYPE="vantom"
 
 # Clang
 CLANG_REPO="ZyCromerZ/Clang"
@@ -219,7 +219,7 @@ echo "
 - **[CLANG]($CLANG_SOURCE) Version**: $CLANG_VERSION
 - **LLD Version**: $LLD_VERSION
 " > bodyFile.md
-echo "$TITLE" > name.txt
+#echo "$TITLE" > name.txt
 
 # Finish
 msg "Done"
