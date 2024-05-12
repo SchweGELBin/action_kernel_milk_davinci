@@ -166,7 +166,7 @@ LLVM_IAS=1"
 rm -rf out
 make clean && make mrproper
 
-if [[ -z $COMMON_DEFCONFIG ]]; then
+if [[ ! -z $COMMON_DEFCONFIG ]]; then
     make O=out $args "$COMMON_DEFCONFIG"
 fi
 make O=out $args "$DEVICE_DEFCONFIG"
