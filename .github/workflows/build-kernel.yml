@@ -52,7 +52,8 @@ jobs:
           cd $GITHUB_WORKSPACE/out
           zip_name="$(ls *.zip)"
           echo "kernel_name=${zip_name::-4}" >> $GITHUB_ENV
-          if [[ ! $(ls | grep "name.txt") ]]; then
+          if [[ ! $(ls name.txt) ]]; then
+              touch name.txt
               echo "${{ env.kernel_name }}-${{ env.tag }}" > name.txt
           fi
       - name: Upload Artifacts
