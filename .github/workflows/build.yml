@@ -108,7 +108,7 @@ jobs:
         id: release
         uses: ncipollo/release-action@v1
         with:
-          name: "${{ env.name }}"
+          name: "${{ env.name }}-${{ env.tag }}"
           tag: "${{ env.tag }}"
           allowUpdates: false
           bodyFile: "${{ github.workspace }}/out/bodyFile.md"
