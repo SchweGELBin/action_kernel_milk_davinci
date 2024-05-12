@@ -52,8 +52,8 @@ jobs:
           cd $GITHUB_WORKSPACE/out
           zip_name="$(ls *.zip)"
           echo "kernel_name=${zip_name::-4}" >> $GITHUB_ENV
-          if [ ! -f name.txt ]; then
-              echo "${{ env.kernel_name }}-${{ env.tag }}" > name.txt
+          if [[ ! -f name.txt ]]; then
+              sudo echo "${{ env.kernel_name }}-${{ env.tag }}" > name.txt
           fi
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
