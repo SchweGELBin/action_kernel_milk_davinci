@@ -21,7 +21,7 @@ Please read following **[README](https://github.com/SchweGELBin/kernel_milk_davi
 KERNEL_NAME       | Name of your Kernel
 KERNEL_GIT        | .git link to your Kernel repo
 KERNEL_BRANCH     | Branch of your Kernel repo
-ANDROID_VERSION   | Your preferred Android version of your kernel
+KERNEL_TYPE       | The type of the Kernel (vantom or perf)
 
 # KernelSU
 KERNELSU_REPO     | KernelSU repo (Owner/reponame) default: "tiann/KernelSU"
@@ -33,7 +33,6 @@ ANYKERNEL3_BRANCH | Branch of your AnyKernel3 repo
 
 # Build
 DEVICE_CODE       | Device codename (Mi 9t / RedmiK20 is "davinci")
-DEVICE_DEFCONFIG  | Defconfig file of your device (Typically [codename]_defconfig e.g. "davinci_defconfig")
 DEVICE_ARCH       | Device architecture (arch/arm, arch/arm64, arch/x64)
 
 # Clang
