@@ -18,9 +18,8 @@ ANYKERNEL3_BRANCH="master"
 
 # Build
 DEVICE_CODE="davinci"
-DEVICE_DEFCONFIG="davinci_defconfig"
-COMMON_DEFCONFIG=""
 DEVICE_ARCH="arch/arm64"
+KERNEL_TYPE="vantom"
 
 # Clang
 CLANG_REPO="ZyCromerZ/Clang"
@@ -49,10 +48,15 @@ if [[ $3 ]]; then
     KERNEL_BRANCH=$3
 fi
 
-if [[ $4 == "vantom" ]]; then
+if [[ $4 ]]; then
+    KERNEL_TYPE=$4
+fi
+
+
+if [[ $KERNEL_TYPE == "vantom" ]]; then
     DEVICE_DEFCONFIG="davinci_defconfig"
     COMMON_DEFCONFIG=""
-elif [[ $4 == "perf" ]]; then
+elif [[ $KERNEL_TYPE == "perf" ]]; then
     DEVICE_DEFCONFIG="vendor/davinci.config"
     COMMON_DEFCONFIG="vendor/sdmsteppe-perf_defconfig"
 fi
@@ -200,6 +204,7 @@ echo "
 - **Time**: $TIME # CET
 
 - **Codename**: $DEVICE_CODE
+- **Kernel Type**: $KERNEL_TYPE
 
 <br>
 
