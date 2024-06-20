@@ -12,6 +12,7 @@ KERNEL_TYPE="vantom"
 # KernelSU
 KERNELSU_REPO="tiann/KernelSU"
 KSU_ENABLED="false"
+KSU_TARGET="b766b98513b5a7eb33bc1c4a76b5702bf1288f07"
 
 # Anykernel3
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
@@ -126,7 +127,7 @@ cd $KERNEL_DIR
 
 msg "KernelSU"
 if [[ $KSU_ENABLED == "true" ]]; then
-    curl -LSs "https://raw.githubusercontent.com/$KERNELSU_REPO/main/kernel/setup.sh" | bash -s main
+    curl -LSs "https://raw.githubusercontent.com/$KERNELSU_REPO/main/kernel/setup.sh" | bash -s $KSU_TARGET
 
     echo "CONFIG_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
     echo "CONFIG_HAVE_KPROBES=y" >> $DEVICE_DEFCONFIG_FILE
