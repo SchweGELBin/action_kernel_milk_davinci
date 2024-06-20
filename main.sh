@@ -13,6 +13,7 @@ KERNEL_TYPE="vantom"
 KERNELSU_REPO="tiann/KernelSU"
 KSU_ENABLED="false"
 KSU_TARGET="b766b98513b5a7eb33bc1c4a76b5702bf1288f07"
+# "main" (latest), empty (stable), "v0.9.5" (last supported non-GKI), "b766b98513b5a7eb33bc1c4a76b5702bf1288f07" (latest non-GKI)
 
 # Anykernel3
 ANYKERNEL3_GIT="https://github.com/SchweGELBin/AnyKernel3_davinci.git"
