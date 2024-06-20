@@ -26,6 +26,7 @@ KERNEL_TYPE       | The type of the Kernel (vantom or perf)
 # KernelSU
 KERNELSU_REPO     | KernelSU repo (Owner/reponame) default: "tiann/KernelSU"
 KSU_ENABLED       | KernelSU enabled ("true") or disabled ("false")
+KSU_TARGET        | KernelSU target commit/tag ("empty" - stable, "main" - latest)
 
 # Anykernel3
 ANYKERNEL3_GIT    | .git link to your AnyKernel3 repo
